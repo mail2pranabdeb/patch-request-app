@@ -34,8 +34,8 @@
                             <input type="hidden" th:field="*{patchNumber}" />
 
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                                <!-- Patch Type (new field) -->
-                                <div class="form-group">
+                                <!-- Patch Type (top / full width) -->
+                                <div class="form-group" style="grid-column: 1 / -1;">
                                     <label class="form-label">Patch Type <span
                                             style="color:var(--danger);">*</span></label>
                                     <div style="display: flex; gap: 15px; align-items: center; margin-top: 3px;">
@@ -50,7 +50,7 @@
                                     </div>
                                 </div>
 
-                                <!-- Book Type -->
+                                <!-- Book Type & Line Type in second row -->
                                 <div class="form-group">
                                     <label class="form-label">Book Type <span
                                             style="color:var(--danger);">*</span></label>
@@ -66,7 +66,6 @@
                                     </div>
                                 </div>
 
-                                <!-- Line Type -->
                                 <div class="form-group">
                                     <label class="form-label">Line Type <span
                                             style="color:var(--danger);">*</span></label>
