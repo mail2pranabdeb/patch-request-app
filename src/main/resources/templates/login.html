@@ -5,56 +5,49 @@
     <meta charset="UTF-8">
     <title>Login - PatchReq</title>
     <!-- Cache buster appended to apply new redesign robustly -->
-    <link rel="stylesheet" th:href="@{/css/style.css(v=3.1)}">
+    <link rel="stylesheet" th:href="@{/css/style.css(v=4.0)}">
 </head>
 
-<body class="login-body">
-    <div class="login-card">
-        <div class="login-logo">
-            <svg width="54" height="54" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-            </svg>
-            <h2
-                style="margin-top:20px; font-weight:800; color:var(--text-main); font-size: 1.7rem; letter-spacing: -0.03em;">
-                Welcome Back</h2>
-            <p style="color:var(--text-muted); font-size:0.95rem; margin-top:8px;">Sign in to access secure
-                configurations</p>
-        </div>
+<body style="background: #f1f4f6; align-items:center; justify-content:center; padding:20px;">
 
+    <div style="width: 100%; max-width: 440px; text-align:center; margin-bottom: 25px;">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.5">
+            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+        </svg>
+        <h2 style="margin-top:15px; font-weight:500; color:var(--text-main); font-size: 1.5rem;">Architect
+            Authentication</h2>
+    </div>
+
+    <div class="card" style="width: 100%; max-width: 440px; padding: 40px;">
         <div th:if="${param.error}"
-            style="margin-bottom:25px; padding:16px; background:#fef2f2; color:var(--danger); border-radius:10px; font-size:0.95rem; text-align:center; border: 1px solid #fecaca; font-weight: 500;">
-            Invalid credentials provided
+            style="margin-bottom:20px; padding:12px; background:#fef2f2; color:var(--danger); border-radius:0.25rem; font-size:0.9rem; text-align:center; border: 1px solid #fecaca;">
+            Invalid credentials provided.
         </div>
         <div th:if="${param.logout}"
-            style="margin-bottom:25px; padding:16px; background:#f0fdf4; color:#059669; border-radius:10px; font-size:0.95rem; text-align:center; border: 1px solid #10b981; font-weight: 500;">
-            You've logged out successfully
+            style="margin-bottom:20px; padding:12px; background:#ecfdf5; color:var(--success); border-radius:0.25rem; font-size:0.9rem; text-align:center; border: 1px solid #10b981;">
+            Securely logged out.
         </div>
 
         <form th:action="@{/login}" method="post">
             <div class="form-group" style="margin-bottom: 20px;">
-                <label class="form-label" style="font-size: 0.9rem;">Administrator Username</label>
-                <input type="text" name="username" class="form-control" style="padding: 14px 16px;" required autofocus
-                    placeholder="e.g., admin">
+                <label class="form-label">Administrator Identity</label>
+                <input type="text" name="username" class="form-control" required autofocus placeholder="System Admin">
             </div>
             <div class="form-group" style="margin-bottom: 25px;">
-                <label class="form-label" style="font-size: 0.9rem;">Secure Password</label>
-                <input type="password" name="password" class="form-control" style="padding: 14px 16px;" required
-                    placeholder="••••••••">
+                <label class="form-label">Password Key</label>
+                <input type="password" name="password" class="form-control" required placeholder="••••••••">
             </div>
-            <button type="submit" class="btn btn-primary"
-                style="width:100%; padding:16px; font-size:1.05rem; margin-top:10px; box-shadow: 0 8px 15px -3px rgba(99, 102, 241, 0.4);">
-                Authenticate Session
+            <button type="submit" class="btn btn-primary" style="width:100%; padding:0.6rem; font-size:1rem;">
+                Login to Dashboard
             </button>
         </form>
-        <div style="text-align:center; margin-top:35px; border-top: 1px solid var(--border); padding-top: 25px;">
-            <a th:href="@{/}"
-                style="color:var(--primary); text-decoration:none; font-size:0.95rem; font-weight:600; display: inline-flex; align-items: center; gap: 6px; transition: color 0.2s;"><svg
-                    width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                    <line x1="19" y1="12" x2="5" y2="12"></line>
-                    <polyline points="12 19 5 12 12 5"></polyline>
-                </svg> Return to Public Dashboard</a>
-        </div>
     </div>
+
+    <div style="width: 100%; max-width: 440px; text-align:center; margin-top: 20px;">
+        <a th:href="@{/}" class="btn btn-outline" style="border:none; color:var(--primary); font-size:0.9rem;">Back to
+            Public Analytics</a>
+    </div>
+
 </body>
 
 </html>

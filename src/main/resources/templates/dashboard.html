@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{fragments :: head('Analytics Dashboard - PatchReq')}"></head>
+
+<body>
+    <div th:replace="~{fragments :: topbar}"></div>
+
+    <div class="app-container">
+        <div th:replace="~{fragments :: sidebar}"></div>
+
+        <div class="main-wrapper">
+            <!-- App Page Title -->
+            <div class="app-page-title">
+                <div class="page-title-heading">
+                    <div class="page-title-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                            <line x1="3" y1="9" x2="21" y2="9" />
+                            <line x1="9" y1="21" x2="9" y2="9" />
+                        </svg>
+                    </div>
+                    <div class="page-title-text">
+                        <h2>Analytics Dashboard</h2>
+                        <p>This is an overview dashboard summarizing Datafix Patch activities inside the system.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-area">
+                <!-- Dashboard Grid -->
+                <div
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-bottom: 30px;">
+                    <!-- Widget 1 -->
+                    <div class="widget-card widget-bg-primary">
+                        <div>
+                            <div class="widget-heading">Total Tickets</div>
+                            <div class="widget-subheading">Active Patches Issued</div>
+                        </div>
+                        <div class="widget-numbers" th:text="${totalTasks ?: 0}">0</div>
+                    </div>
+                    <!-- Widget 2 -->
+                    <div class="widget-card widget-bg-success">
+                        <div>
+                            <div class="widget-heading">Open Books</div>
+                            <div class="widget-subheading">Recently Deployed Configs</div>
+                        </div>
+                        <div class="widget-numbers" th:text="${openBookPatch ?: 'N/A'}">N/A</div>
+                    </div>
+                    <!-- Widget 3 -->
+                    <div class="widget-card widget-bg-info">
+                        <div>
+                            <div class="widget-heading">Closed Books</div>
+                            <div class="widget-subheading">Archival Configs Linked</div>
+                        </div>
+                        <div class="widget-numbers" th:text="${closedBookPatch ?: 'N/A'}">N/A</div>
+                    </div>
+                </div>
+
+                <!-- Additional generic card -->
+                <div class="card">
+                    <div class="card-header">
+                        Activity Overview
+                    </div>
+                    <div class="card-body">
+                        <p style="color:var(--text-muted); margin-bottom: 20px;">The primary metrics regarding generated
+                            system datafix patches are computed in the cards above. The system enables comprehensive
+                            configuration mapping natively inside this environment. You can navigate seamlessly through
+                            the sidebar to perform modifications or build additional patch identifiers.</p>
+                        <div>
+                            <a th:href="@{/tasks}" class="btn btn-primary" style="margin-right: 15px;">View Full Patch
+                                List</a>
+                            <a th:href="@{/tasks/new}" class="btn btn-outline">Generate New Number</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

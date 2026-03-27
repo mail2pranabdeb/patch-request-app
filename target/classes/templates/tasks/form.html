@@ -4,76 +4,101 @@
 <head th:replace="~{fragments :: head('Patch Request Form - PatchReq')}"></head>
 
 <body>
-    <div th:replace="~{fragments :: sidebar}"></div>
+    <div th:replace="~{fragments :: topbar}"></div>
 
-    <div class="main-content">
-        <div th:replace="~{fragments :: topbar}"></div>
-        <div class="content-area" style="align-items: center; justify-content: flex-start;">
-            <div class="card" style="width: 100%; max-width: 680px; margin-top: 10px; margin-bottom: 30px;">
-                <div style="font-size: 1.6rem; font-weight: 800; margin-bottom: 30px; color: var(--text-main); border-bottom: 2px solid #f1f5f9; padding-bottom: 18px; letter-spacing: -0.02em;"
-                    th:text="${task.id == null ? 'Generate New Patch Number' : 'Edit Patch Request'}">Form</div>
+    <div class="app-container">
+        <div th:replace="~{fragments :: sidebar}"></div>
 
-                <form th:action="@{/tasks/save}" th:object="${task}" method="post">
-                    <input type="hidden" th:field="*{id}" />
-                    <input type="hidden" th:field="*{patchNumber}" />
-
-                    <div class="form-group">
-                        <label class="form-label">Book Type <span style="color:#ef4444;">*</span></label>
-                        <div style="display: flex; gap: 20px; align-items: center; margin-top: 10px;">
-                            <label class="radio-tile">
-                                <input type="radio" th:field="*{bookType}" value="Open Book" required
-                                    style="width:18px; height:18px; accent-color: var(--primary);"> Open Book
-                            </label>
-                            <label class="radio-tile">
-                                <input type="radio" th:field="*{bookType}" value="Closed Book" required
-                                    style="width:18px; height:18px; accent-color: var(--primary);"> Closed Book
-                            </label>
-                        </div>
+        <div class="main-wrapper">
+            <div class="app-page-title">
+                <div class="page-title-heading">
+                    <div class="page-title-icon" style="color: var(--success);">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M12 5v14M5 12h14" />
+                        </svg>
                     </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Line Type <span style="color:#ef4444;">*</span></label>
-                        <div style="display: flex; gap: 20px; align-items: center; margin-top: 10px;">
-                            <label class="radio-tile">
-                                <input type="radio" th:field="*{lineType}" value="RPP1" required
-                                    style="width:18px; height:18px; accent-color: var(--primary);"> Default RPP1
-                            </label>
-                        </div>
+                    <div class="page-title-text">
+                        <h2 th:text="${task.id == null ? 'Generate New Patch Number' : 'Edit Patch Request'}">Patch Form
+                        </h2>
+                        <p>Fill in the required Datafix metrics below to build or update a system configuration.</p>
                     </div>
+                </div>
+            </div>
 
-                    <div class="form-group">
-                        <label class="form-label">Task Number <span style="color:#ef4444;">*</span></label>
-                        <input type="text" class="form-control" th:field="*{taskNumber}" required
-                            placeholder="e.g., TSK-9391">
+            <div class="content-area">
+                <div class="card" style="max-width: 700px;">
+                    <div class="card-header">
+                        Interactive Form Builder
                     </div>
+                    <div class="card-body">
+                        <form th:action="@{/tasks/save}" th:object="${task}" method="post">
+                            <input type="hidden" th:field="*{id}" />
+                            <input type="hidden" th:field="*{patchNumber}" />
 
-                    <div class="form-group">
-                        <label class="form-label">Short Description <span style="color:#ef4444;">*</span></label>
-                        <input type="text" class="form-control" th:field="*{taskShortDescription}" required
-                            placeholder="Brief description of the patch objective">
-                    </div>
+                            <div class="form-group">
+                                <label class="form-label">Book Type <span style="color:var(--danger);">*</span></label>
+                                <div style="display: flex; gap: 20px; align-items: center; margin-top: 5px;">
+                                    <label class="radio-tile">
+                                        <input type="radio" th:field="*{bookType}" value="Open Book" required
+                                            style="width:16px; height:16px;"> Open Book
+                                    </label>
+                                    <label class="radio-tile">
+                                        <input type="radio" th:field="*{bookType}" value="Closed Book" required
+                                            style="width:16px; height:16px;"> Closed Book
+                                    </label>
+                                </div>
+                            </div>
 
-                    <div class="form-group">
-                        <label class="form-label">Requested By <span style="color:#ef4444;">*</span></label>
-                        <input type="text" class="form-control" th:field="*{requestedBy}" required
-                            placeholder="Your name or team identifier">
-                    </div>
+                            <div class="form-group" style="margin-top: 20px;">
+                                <label class="form-label">Line Type <span style="color:var(--danger);">*</span></label>
+                                <div style="display: flex; gap: 20px; align-items: center; margin-top: 5px;">
+                                    <label class="radio-tile">
+                                        <input type="radio" th:field="*{lineType}" value="RPP1" required
+                                            style="width:16px; height:16px;"> Default RPP1
+                                    </label>
+                                </div>
+                            </div>
 
-                    <div
-                        style="margin-top: 35px; display: flex; gap: 15px; padding-top: 20px; border-top: 1px solid #f1f5f9;">
-                        <button type="submit" class="btn btn-primary" style="flex:1; padding: 14px;">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2.5">
-                                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
-                                <polyline points="17 21 17 13 7 13 7 21" />
-                                <polyline points="7 3 7 8 15 8" />
-                            </svg>
-                            <span th:text="${task.id == null ? 'Generate Patch & Save' : 'Update Record'}">Save</span>
-                        </button>
-                        <a th:href="@{/tasks}" class="btn btn-outline"
-                            style="flex:1; text-align:center; padding: 14px;">Cancel & Return</a>
+                            <div class="form-group" style="margin-top: 25px;">
+                                <label class="form-label">Task Number <span
+                                        style="color:var(--danger);">*</span></label>
+                                <input type="text" class="form-control" th:field="*{taskNumber}" required
+                                    placeholder="e.g., TSK-9391">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Short Description <span
+                                        style="color:var(--danger);">*</span></label>
+                                <input type="text" class="form-control" th:field="*{taskShortDescription}" required
+                                    placeholder="Brief description of the patch objective">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Requested By <span
+                                        style="color:var(--danger);">*</span></label>
+                                <input type="text" class="form-control" th:field="*{requestedBy}" required
+                                    placeholder="Your name or team identifier">
+                            </div>
+
+                            <div
+                                style="margin-top: 35px; display: flex; gap: 15px; padding-top: 20px; border-top: 1px solid rgba(26,54,126,0.125);">
+                                <button type="submit" class="btn btn-primary" style="flex:1; padding: 0.6rem;">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2.5" style="margin-right:2px">
+                                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+                                        <polyline points="17 21 17 13 7 13 7 21" />
+                                        <polyline points="7 3 7 8 15 8" />
+                                    </svg>
+                                    <span
+                                        th:text="${task.id == null ? 'Generate Patch & Save' : 'Update Record'}">Save</span>
+                                </button>
+                                <a th:href="@{/tasks}" class="btn btn-outline" style="flex:1; padding: 0.6rem;">Cancel /
+                                    Return</a>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>

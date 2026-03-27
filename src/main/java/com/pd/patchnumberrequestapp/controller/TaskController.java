@@ -17,8 +17,13 @@ public class TaskController {
     }
 
     @GetMapping("/")
-    public String index() {
-        return "redirect:/tasks";
+    public String index(Model model) {
+        java.util.List<Task> allTasks = taskService.getAllTasks();
+        model.addAttribute("totalTasks", allTasks.size());
+        model.addAttribute("openBookPatch", allTasks.stream().filter(t -> "Open Book".equals(t.getBookType())).count());
+        model.addAttribute("closedBookPatch",
+                allTasks.stream().filter(t -> "Closed Book".equals(t.getBookType())).count());
+        return "dashboard";
     }
 
     @GetMapping("/tasks")
