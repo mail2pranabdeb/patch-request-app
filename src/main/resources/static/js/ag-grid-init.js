@@ -33,7 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
             sortable: true,
             filter: true,
             resizable: true,
-            flex: 1
+            flex: 1,
+            minWidth: 110
         }
     };
 
