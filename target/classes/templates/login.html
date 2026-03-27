@@ -3,51 +3,56 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Login - PatchReq</title>
+    <title>Login - Patch Number Generation App</title>
     <!-- Cache buster appended to apply new redesign robustly -->
     <link rel="stylesheet" th:href="@{/css/style.css(v=4.0)}">
 </head>
 
-<body style="background: #f1f4f6; align-items:center; justify-content:center; padding:20px;">
-
-    <div style="width: 100%; max-width: 440px; text-align:center; margin-bottom: 25px;">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.5">
-            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-        </svg>
-        <h2 style="margin-top:15px; font-weight:500; color:var(--text-main); font-size: 1.5rem;">Architect
-            Authentication</h2>
-    </div>
-
-    <div class="card" style="width: 100%; max-width: 440px; padding: 40px;">
-        <div th:if="${param.error}"
-            style="margin-bottom:20px; padding:12px; background:#fef2f2; color:var(--danger); border-radius:0.25rem; font-size:0.9rem; text-align:center; border: 1px solid #fecaca;">
-            Invalid credentials provided.
-        </div>
-        <div th:if="${param.logout}"
-            style="margin-bottom:20px; padding:12px; background:#ecfdf5; color:var(--success); border-radius:0.25rem; font-size:0.9rem; text-align:center; border: 1px solid #10b981;">
-            Securely logged out.
+<body style="display: flex; align-items: center; justify-content: center; background-color: var(--bg-body);">
+    <div style="width: 100%; max-width: 400px; padding: 20px;">
+        <div style="text-align: center; margin-bottom: 30px;">
+            <div
+                style="display: inline-flex; align-items: center; justify-content: center; color: var(--primary); margin-bottom: 15px;">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                </svg>
+            </div>
+            <h2 style="color: var(--text-main); font-weight: 500;">Patch Number Generation</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Please sign in to your restricted account.</p>
         </div>
 
-        <form th:action="@{/login}" method="post">
-            <div class="form-group" style="margin-bottom: 20px;">
-                <label class="form-label">Administrator Identity</label>
-                <input type="text" name="username" class="form-control" required autofocus placeholder="System Admin">
-            </div>
-            <div class="form-group" style="margin-bottom: 25px;">
-                <label class="form-label">Password Key</label>
-                <input type="password" name="password" class="form-control" required placeholder="••••••••">
-            </div>
-            <button type="submit" class="btn btn-primary" style="width:100%; padding:0.6rem; font-size:1rem;">
-                Login to Dashboard
-            </button>
-        </form>
-    </div>
+        <div class="card" style="margin-bottom: 20px;">
+            <div class="card-body" style="padding: 2.5rem 2rem;">
+                <form th:action="@{/login}" method="post">
+                    <div th:if="${param.error}"
+                        style="background:#fff1f0; color:#d92550; padding:10px; margin-bottom:15px; border-radius:4px; font-size:0.85rem; text-align:center; border: 1px solid #f8baba;">
+                        Invalid username or password.
+                    </div>
+                    <div th:if="${param.logout}"
+                        style="background:#ecfdf5; color:#065f46; padding:10px; margin-bottom:15px; border-radius:4px; font-size:0.85rem; text-align:center; border: 1px solid #10b981;">
+                        You have been logged out securely.
+                    </div>
 
-    <div style="width: 100%; max-width: 440px; text-align:center; margin-top: 20px;">
-        <a th:href="@{/}" class="btn btn-outline" style="border:none; color:var(--primary); font-size:0.9rem;">Back to
-            Public Analytics</a>
-    </div>
+                    <div class="form-group" style="margin-bottom: 15px;">
+                        <input type="text" id="username" name="username" class="form-control"
+                            placeholder="Admin Username" required autofocus>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 25px;">
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Password"
+                            required>
+                    </div>
 
+                    <button type="submit" class="btn btn-primary"
+                        style="width: 100%; justify-content: center; padding: 0.6rem; font-weight: 600; font-size: 0.95rem;">
+                        Sign in to Dashboard
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div style="text-align: center; font-size: 0.8rem; color: var(--text-muted);">
+            &copy; 2026 Secure Internal Tooling
+        </div>
+    </div>
 </body>
 
 </html>

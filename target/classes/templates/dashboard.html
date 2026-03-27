@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<head th:replace="~{fragments :: head('Analytics Dashboard - PatchReq')}"></head>
+<head th:replace="~{fragments :: head('Analytics Dashboard - Patch Number Generation App')}"></head>
 
 <body>
     <div th:replace="~{fragments :: topbar}"></div>
 
     <div class="app-container">
-        <div th:replace="~{fragments :: sidebar}"></div>
+        <div th:replace="~{fragments :: sidebar('dashboard')}"></div>
 
         <div class="main-wrapper">
             <!-- App Page Title -->
             <div class="app-page-title">
                 <div class="page-title-heading">
                     <div class="page-title-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
                             <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
                             <line x1="3" y1="9" x2="21" y2="9" />
@@ -31,7 +31,7 @@
             <div class="content-area">
                 <!-- Dashboard Grid -->
                 <div
-                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-bottom: 30px;">
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-bottom: 15px; flex-shrink: 0;">
                     <!-- Widget 1 -->
                     <div class="widget-card widget-bg-primary">
                         <div>
@@ -46,7 +46,7 @@
                             <div class="widget-heading">Open Books</div>
                             <div class="widget-subheading">Recently Deployed Configs</div>
                         </div>
-                        <div class="widget-numbers" th:text="${openBookPatch ?: 'N/A'}">N/A</div>
+                        <div class="widget-numbers" th:text="${openBookPatch ?: 0}">0</div>
                     </div>
                     <!-- Widget 3 -->
                     <div class="widget-card widget-bg-info">
@@ -54,24 +54,26 @@
                             <div class="widget-heading">Closed Books</div>
                             <div class="widget-subheading">Archival Configs Linked</div>
                         </div>
-                        <div class="widget-numbers" th:text="${closedBookPatch ?: 'N/A'}">N/A</div>
+                        <div class="widget-numbers" th:text="${closedBookPatch ?: 0}">0</div>
                     </div>
                 </div>
 
                 <!-- Additional generic card -->
-                <div class="card">
+                <div class="card" style="flex: 1; min-height: 0; margin-bottom: 0;">
                     <div class="card-header">
                         Activity Overview
                     </div>
                     <div class="card-body">
-                        <p style="color:var(--text-muted); margin-bottom: 20px;">The primary metrics regarding generated
-                            system datafix patches are computed in the cards above. The system enables comprehensive
-                            configuration mapping natively inside this environment. You can navigate seamlessly through
-                            the sidebar to perform modifications or build additional patch identifiers.</p>
+                        <p style="color:var(--text-muted); margin-bottom: 15px; font-size: 0.9rem;">The primary metrics
+                            regarding generated system datafix patches are computed in the cards above. The system
+                            enables comprehensive configuration mapping natively inside this environment. You can
+                            navigate seamlessly through the sidebar to perform modifications or build additional patch
+                            identifiers.</p>
                         <div>
-                            <a th:href="@{/tasks}" class="btn btn-primary" style="margin-right: 15px;">View Full Patch
-                                List</a>
-                            <a th:href="@{/tasks/new}" class="btn btn-outline">Generate New Number</a>
+                            <a th:href="@{/tasks}" class="btn btn-primary"
+                                style="margin-right: 15px; padding: 0.5rem 1rem;">View Full Patch List</a>
+                            <a th:href="@{/tasks/new}" class="btn btn-outline" style="padding: 0.5rem 1rem;">Generate
+                                New Number</a>
                         </div>
                     </div>
                 </div>

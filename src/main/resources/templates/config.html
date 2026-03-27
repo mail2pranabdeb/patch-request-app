@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<head th:replace="~{fragments :: head('Configuration - PatchReq')}"></head>
+<head th:replace="~{fragments :: head('Configuration - Patch Number Generation App')}"></head>
 
 <body>
     <div th:replace="~{fragments :: topbar}"></div>
 
     <div class="app-container">
-        <div th:replace="~{fragments :: sidebar}"></div>
+        <div th:replace="~{fragments :: sidebar('config')}"></div>
 
         <div class="main-wrapper">
             <div class="app-page-title">
                 <div class="page-title-heading">
                     <div class="page-title-icon" style="color: var(--warning);">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
                             <circle cx="12" cy="12" r="3" />
                             <path
@@ -29,44 +29,43 @@
 
             <div class="content-area">
                 <div th:if="${param.success}"
-                    style="background:#ecfdf5; color:#065f46; margin-bottom: 20px; padding: 12px 20px; border-radius:0.25rem; border: 1px solid #10b981;">
+                    style="background:#ecfdf5; color:#065f46; margin-bottom: 10px; padding: 8px 15px; border-radius:0.25rem; font-size: 0.85rem; border: 1px solid #10b981;">
                     <strong>Success!</strong> Configuration parameters updated securely.
                 </div>
 
-                <div class="card" style="max-width: 700px;">
-                    <div class="card-header">
-                        Administrative Overrides
-                    </div>
+                <div class="card" style="max-width: 800px;">
                     <div class="card-body">
                         <form th:action="@{/config/save}" th:object="${config}" method="post">
                             <input type="hidden" th:field="*{id}" />
 
-                            <div class="form-group">
-                                <label class="form-label">Sequence Date Format</label>
-                                <input type="text" class="form-control" th:field="*{dateFormat}" required
-                                    placeholder="e.g., yyyyMMdd">
-                            </div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                <div class="form-group">
+                                    <label class="form-label">Sequence Date Format</label>
+                                    <input type="text" class="form-control" th:field="*{dateFormat}" required
+                                        placeholder="e.g., yyyyMMdd">
+                                </div>
 
-                            <div class="form-group">
-                                <label class="form-label">Sequence Length</label>
-                                <input type="number" class="form-control" th:field="*{sequenceLength}" required>
-                            </div>
+                                <div class="form-group">
+                                    <label class="form-label">Sequence Length</label>
+                                    <input type="number" class="form-control" th:field="*{sequenceLength}" required>
+                                </div>
 
-                            <div class="form-group" style="margin-top:25px;">
-                                <label class="form-label">Open Book Last Deployed Patch</label>
-                                <input type="text" class="form-control" th:field="*{openBookLastDeployedPatch}"
-                                    placeholder="Record the latest patch here">
-                            </div>
+                                <div class="form-group">
+                                    <label class="form-label">Open Book Last Deployed Patch</label>
+                                    <input type="text" class="form-control" th:field="*{openBookLastDeployedPatch}"
+                                        placeholder="Record the latest patch here">
+                                </div>
 
-                            <div class="form-group">
-                                <label class="form-label">Closed Book Last Deployed Patch</label>
-                                <input type="text" class="form-control" th:field="*{closedBookLastDeployedPatch}"
-                                    placeholder="Record the latest patch here">
+                                <div class="form-group">
+                                    <label class="form-label">Closed Book Last Deployed Patch</label>
+                                    <input type="text" class="form-control" th:field="*{closedBookLastDeployedPatch}"
+                                        placeholder="Record the latest patch here">
+                                </div>
                             </div>
 
                             <div
-                                style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(26,54,126,0.125);">
-                                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.6rem;">
+                                style="margin-top: 15px; padding-top: 10px; border-top: 1px solid rgba(26,54,126,0.1);">
+                                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.4rem;">
                                     Save System Configuration
                                 </button>
                             </div>
