@@ -112,6 +112,14 @@
                                 </div>
                             </div>
 
+                            <!-- Audit info -->
+                            <div th:if="${task.id != null}" style="margin-top: 15px; padding: 10px 0; border-top: 1px dashed var(--border); display: flex; align-items: center; gap: 10px;">
+                                <div style="color: var(--text-muted); font-size: 0.8rem; font-weight: 500;">SYSTEM AUDIT:</div>
+                                <div style="color: var(--text-main); font-size: 0.85rem;">
+                                    Created on <span th:text="${#temporals.format(task.createdAt, 'dd-MMM-yyyy HH:mm:ss') ?: 'Legacy Record'}"></span>
+                                </div>
+                            </div>
+
                             <div
                                 style="margin-top: 15px; display: flex; gap: 10px; padding-top: 10px; border-top: 1px solid rgba(26,54,126,0.1);">
                                 <button type="submit" class="btn btn-primary" style="flex:1; padding: 0.4rem;">

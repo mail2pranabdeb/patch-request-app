@@ -26,6 +26,10 @@ public class TaskRepository {
         task.setTaskShortDescription(rs.getString("task_short_description"));
         task.setRequestedBy(rs.getString("requested_by"));
         task.setPatchNumber(rs.getString("patch_number"));
+        try {
+            java.sql.Timestamp ts = rs.getTimestamp("created_at");
+            if (ts != null) task.setCreatedAt(ts.toLocalDateTime());
+        } catch (Exception e) {}
         return task;
     };
 
@@ -43,7 +47,7 @@ public class TaskRepository {
             org.springframework.jdbc.support.KeyHolder keyHolder = new org.springframework.jdbc.support.GeneratedKeyHolder();
             jdbcTemplate.update(connection -> {
                 java.sql.PreparedStatement ps = connection.prepareStatement(
-                    "INSERT INTO TOOL_APP_TASK (id, patch_type, book_type, line_type, task_number, task_short_description, requested_by, patch_number) VALUES (TOOL_PATCH_REQUEST_SEQ.nextval, ?, ?, ?, ?, ?, ?, ?)",
+                    "INSERT INTO TOOL_APP_TASK (id, patch_type, book_type, line_type, task_number, task_short_description, requested_by, patch_number, created_at) VALUES (TOOL_PATCH_REQUEST_SEQ.nextval, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)",
                     new String[]{"ID"});
                 ps.setString(1, task.getPatchType());
                 ps.setString(2, task.getBookType());

@@ -23,5 +23,6 @@ CREATE TABLE TOOL_APP_TASK (
     task_number VARCHAR2(255),
     task_short_description VARCHAR2(500),
     requested_by VARCHAR2(255),
-    patch_number VARCHAR2(255)
+    patch_number VARCHAR2(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

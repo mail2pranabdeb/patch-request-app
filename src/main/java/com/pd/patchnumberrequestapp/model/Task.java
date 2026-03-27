@@ -9,6 +9,7 @@ public class Task {
     private String taskShortDescription;
     private String requestedBy;
     private String patchNumber;
+    private java.time.LocalDateTime createdAt;
 
     public Task() {
     }
@@ -85,6 +86,14 @@ public class Task {
 
     public void setPatchNumber(String patchNumber) {
         this.patchNumber = patchNumber;
+    }
+
+    public java.time.LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(java.time.LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
     @Override
