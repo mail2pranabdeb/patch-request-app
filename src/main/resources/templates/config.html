@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{fragments :: head('Configuration - PatchReq')}"></head>
+
+<body>
+    <div th:replace="~{fragments :: sidebar}"></div>
+
+    <div class="main-content">
+        <div th:replace="~{fragments :: topbar}"></div>
+        <div class="content-area">
+            <div class="card" style="max-width: 600px; margin: 0 auto;">
+                <div class="card-title">System Configuration</div>
+
+                <div th:if="${param.success}" class="badge badge-info"
+                    style="background:#d1fae5; color:#065f46; margin-bottom: 20px; padding: 10px; font-size:1rem; display:block; text-align:center;">
+                    Configuration saved successfully!
+                </div>
+
+                <form th:action="@{/config/save}" th:object="${config}" method="post">
+                    <input type="hidden" th:field="*{id}" />
+
+                    <div class="form-group">
+                        <label class="form-label">Sequence Date Format</label>
+                        <input type="text" class="form-control" th:field="*{dateFormat}" required
+                            placeholder="e.g., yyyyMMdd">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Sequence Length</label>
+                        <input type="number" class="form-control" th:field="*{sequenceLength}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Open Book Last Deployed Patch</label>
+                        <input type="text" class="form-control" th:field="*{openBookLastDeployedPatch}"
+                            placeholder="Record the latest patch here">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Closed Book Last Deployed Patch</label>
+                        <input type="text" class="form-control" th:field="*{closedBookLastDeployedPatch}"
+                            placeholder="Record the latest patch here">
+                    </div>
+
+                    <div style="margin-top: 25px; display: flex; gap: 10px;">
+                        <button type="submit" class="btn btn-primary" style="flex:1;">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+                                <polyline points="17 21 17 13 7 13 7 21" />
+                                <polyline points="7 3 7 8 15 8" />
+                            </svg> Save Configuration
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

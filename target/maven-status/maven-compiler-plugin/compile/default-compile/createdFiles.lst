@@ -1,0 +1,13 @@
+com\pd\patchnumberrequestapp\service\TaskService.class
+com\pd\patchnumberrequestapp\controller\ConfigController.class
+com\pd\patchnumberrequestapp\model\PatchConfig.class
+com\pd\patchnumberrequestapp\model\Task.class
+com\pd\patchnumberrequestapp\PatchNumberRequestAppApplication.class
+com\pd\patchnumberrequestapp\model\User.class
+com\pd\patchnumberrequestapp\repository\TaskRepository.class
+com\pd\patchnumberrequestapp\ServletInitializer.class
+com\pd\patchnumberrequestapp\repository\UserRepository.class
+com\pd\patchnumberrequestapp\repository\PatchConfigRepository.class
+com\pd\patchnumberrequestapp\security\CustomUserDetailsService.class
+com\pd\patchnumberrequestapp\controller\TaskController.class
+com\pd\patchnumberrequestapp\config\SecurityConfig.class

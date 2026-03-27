@@ -1,0 +1,6 @@
+spring:
+  profiles:
+    active: local
+server:
+  servlet:
+    context-path: /patch-request-app

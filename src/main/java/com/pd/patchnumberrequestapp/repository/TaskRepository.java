@@ -1,0 +1,69 @@
+package com.pd.patchnumberrequestapp.repository;
+
+import com.pd.patchnumberrequestapp.model.Task;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
+
+@Repository
+public class TaskRepository {
+    private final JdbcTemplate jdbcTemplate;
+
+    public TaskRepository(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+    private final RowMapper<Task> rowMapper = (rs, rowNum) -> {
+        Task task = new Task();
+        task.setId(rs.getLong("id"));
+        task.setBookType(rs.getString("book_type"));
+        task.setLineType(rs.getString("line_type"));
+        task.setTaskNumber(rs.getString("task_number"));
+        task.setTaskShortDescription(rs.getString("task_short_description"));
+        task.setRequestedBy(rs.getString("requested_by"));
+        task.setPatchNumber(rs.getString("patch_number"));
+        return task;
+    };
+
+    public List<Task> findAll() {
+        return jdbcTemplate.query("SELECT * FROM TOOL_APP_TASK ORDER BY id DESC", rowMapper);
+    }
+
+    public Optional<Task> findById(Long id) {
+        String sql = "SELECT * FROM TOOL_APP_TASK WHERE id = ?";
+        return jdbcTemplate.query(sql, rowMapper, id).stream().findFirst();
+    }
+
+    public void save(Task task) {
+        if (task.getId() == null) {
+            org.springframework.jdbc.support.KeyHolder keyHolder = new org.springframework.jdbc.support.GeneratedKeyHolder();
+            jdbcTemplate.update(connection -> {
+                java.sql.PreparedStatement ps = connection.prepareStatement(
+                    "INSERT INTO TOOL_APP_TASK (id, book_type, line_type, task_number, task_short_description, requested_by, patch_number) VALUES (TOOL_PATCH_REQUEST_SEQ.nextval, ?, ?, ?, ?, ?, ?)",
+                    new String[]{"ID"});
+                ps.setString(1, task.getBookType());
+                ps.setString(2, task.getLineType());
+                ps.setString(3, task.getTaskNumber());
+                ps.setString(4, task.getTaskShortDescription());
+                ps.setString(5, task.getRequestedBy());
+                ps.setString(6, task.getPatchNumber());
+                return ps;
+            }, keyHolder);
+            if (keyHolder.getKey() != null) {
+                task.setId(keyHolder.getKey().longValue());
+            }
+        } else {
+            String sql = "UPDATE TOOL_APP_TASK SET book_type = ?, line_type = ?, task_number = ?, task_short_description = ?, requested_by = ?, patch_number = ? WHERE id = ?";
+            jdbcTemplate.update(sql, task.getBookType(), task.getLineType(), 
+                                task.getTaskNumber(), task.getTaskShortDescription(), 
+                                task.getRequestedBy(), task.getPatchNumber(), task.getId());
+        }
+    }
+
+    public void deleteById(Long id) {
+        jdbcTemplate.update("DELETE FROM TOOL_APP_TASK WHERE id = ?", id);
+    }
+}

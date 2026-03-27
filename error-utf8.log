@@ -1,0 +1,23 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------< com.pd:patchnumberrequestapp >--------------------
+[INFO] Building patchnumberrequestapp 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ war ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.3.2:clean (default-clean) @ patchnumberrequestapp ---
+[INFO] Deleting D:\Projects\patch-request-app\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ patchnumberrequestapp ---
+[INFO] Copying 3 resources from src\main\resources to target\classes
+[INFO] Copying 13 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ patchnumberrequestapp ---
+[INFO] Changes detected - recompiling the module! :source
+[INFO] Compiling 13 source files with javac [debug release 17] to target\classes
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.226 s
+[INFO] Finished at: 2026-03-27T20:38:38+02:00
+[INFO] ------------------------------------------------------------------------

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{fragments :: head('Dashboard - PatchReq')}"></head>
+
+<body>
+    <div th:replace="~{fragments :: sidebar}"></div>
+
+    <div class="main-content">
+        <div th:replace="~{fragments :: topbar}"></div>
+        <div class="content-area">
+
+            <div th:if="${successMessage}" class="badge badge-info"
+                style="background:#d1fae5; color:#065f46; margin-bottom: 20px; padding: 15px; font-size:1rem; display:block; border-radius:8px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    style="vertical-align: middle; margin-right: 5px;">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                    <polyline points="22 4 12 14.01 9 11.01" />
+                </svg>
+                <span th:text="${successMessage}" style="vertical-align: middle;"></span>
+            </div>
+
+            <div class="card" style="display: flex; flex-direction: column; height: calc(100vh - 150px);">
+                <div class="card-title">
+                    Patch Requests
+                    <div>
+                        <button id="grid-export" class="btn btn-outline" style="margin-right: 10px;"><svg width="16"
+                                height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
+                            </svg> Export CSV</button>
+                        <a th:href="@{/tasks/new}" class="btn btn-primary"><svg width="16" height="16"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 5v14M5 12h14" />
+                            </svg> New Request</a>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 20px; display: flex; justify-content: flex-start;">
+                    <input type="text" id="grid-search" class="form-control" style="max-width: 300px;"
+                        placeholder="Search records...">
+                </div>
+
+                <!-- AG Grid container -->
+                <div id="myGrid" class="ag-theme-alpine" style="flex: 1; min-height: 400px; width: 100%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auth Flags and Row Data via Thymeleaf -->
+    <script th:inline="javascript">
+        var isAuthenticated = false;
+    </script>
+    <script th:inline="javascript" sec:authorize="isAuthenticated()">
+        isAuthenticated = true;
+    </script>
+    <script th:inline="javascript">
+        var rowData = /*[[${tasks}]]*/[];
+    </script>
+
+    <!-- AG Grid Community Core & Styles Local -->
+    <link rel="stylesheet" th:href="@{/vendor/ag-grid/ag-grid.css}">
+    <link rel="stylesheet" th:href="@{/vendor/ag-grid/ag-theme-alpine.css}">
+    <script th:src="@{/vendor/ag-grid/ag-grid-community.min.js}"></script>
+
+    <!-- Initialize AG Grid -->
+    <script th:src="@{/js/ag-grid-init.js}"></script>
+</body>
+
+</html>

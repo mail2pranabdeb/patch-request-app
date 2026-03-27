@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login - PatchReq</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body class="login-body">
+    <div class="login-card">
+        <h2><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary-color)" stroke-width="2">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+            </svg> PatchReq</h2>
+
+        <div th:if="${param.error}" class="login-alert">
+            Invalid username or password.
+        </div>
+        <div th:if="${param.logout}" class="login-alert" style="background:#d1fae5; color:#065f46;">
+            You have been logged out.
+        </div>
+
+        <form th:action="@{/login}" method="post">
+            <div class="form-group" style="text-align:left;">
+                <label class="form-label">Username</label>
+                <input type="text" name="username" class="form-control" required autofocus placeholder="Try 'admin'">
+            </div>
+            <div class="form-group" style="text-align:left; margin-bottom: 25px;">
+                <label class="form-label">Password</label>
+                <input type="password" name="password" class="form-control" required placeholder="Try 'admin'">
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%; padding:12px; font-size:1rem;">Sign
+                In</button>
+        </form>
+
+        <div style="margin-top: 20px;">
+            <a th:href="@{/}"
+                style="color:var(--text-muted); text-decoration:none; font-size:0.875rem; display:flex; align-items:center; justify-content:center; gap:6px;"><svg
+                    width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7" />
+                </svg> Back to Dashboard</a>
+        </div>
+    </div>
+</body>
+
+</html>

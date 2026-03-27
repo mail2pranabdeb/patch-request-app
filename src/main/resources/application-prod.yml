@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@//localhost:1521/ORCL
+    driver-class-name: oracle.jdbc.OracleDriver
+    username: prod_user
+    password: prod_password
