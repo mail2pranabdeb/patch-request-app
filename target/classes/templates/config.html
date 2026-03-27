@@ -9,8 +9,10 @@
     <div class="main-content">
         <div th:replace="~{fragments :: topbar}"></div>
         <div class="content-area">
-            <div class="card" style="max-width: 600px; margin: 0 auto;">
-                <div class="card-title">System Configuration</div>
+            <div class="card" style="max-width: 600px; margin: 30px auto; width: 100%; flex: 0 0 auto;">
+                <div
+                    style="font-size: 1.5rem; font-weight: 600; margin-bottom: 25px; color: #111827; border-bottom: 1px solid #e5e7eb; padding-bottom: 15px;">
+                    System Configuration</div>
 
                 <div th:if="${param.success}" class="badge badge-info"
                     style="background:#d1fae5; color:#065f46; margin-bottom: 20px; padding: 10px; font-size:1rem; display:block; text-align:center;">

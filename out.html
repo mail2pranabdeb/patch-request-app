@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - PatchReq</title>
+    <link rel="stylesheet" href="/patch-request-app/css/style.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+            </svg> PatchReq
+        </div>
+        <ul class="nav-links">
+            <li><a href="/patch-request-app/tasks"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <path d="M9 5H21M9 12H21M9 19H21M3 5h4M3 12h4M3 19h4" />
+                    </svg> Patch List</a></li>
+            <li><a href="/patch-request-app/tasks/new"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <path d="M12 5v14M5 12h14" />
+                    </svg> Generate Patch Number</a></li>
+            <li><a href="/patch-request-app/prepare"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12" />
+                    </svg> Prepare Patch</a></li>
+            
+        </ul>
+        <div class="user-info">
+            
+            <div>
+                <a href="/patch-request-app/login" class="btn btn-primary" style="width:100%; text-align:center;">Login to Edit</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="topbar">
+        <div></div>
+        <div>
+            <span class="badge badge-info"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 16v-4M12 8h.01" />
+                </svg> Version 1.0</span>
+        </div>
+    </div>
+        <div class="content-area">
+
+            
+
+            <div class="card" style="display: flex; flex-direction: column; height: calc(100vh - 150px);">
+                <div class="card-title">
+                    Patch Requests
+                    <div>
+                        <button id="grid-export" class="btn btn-outline" style="margin-right: 10px;"><svg width="16"
+                                height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
+                            </svg> Export CSV</button>
+                        <a href="/patch-request-app/tasks/new" class="btn btn-primary"><svg width="16" height="16"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 5v14M5 12h14" />
+                            </svg> New Request</a>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 20px; display: flex; justify-content: flex-start;">
+                    <input type="text" id="grid-search" class="form-control" style="max-width: 300px;"
+                        placeholder="Search records...">
+                </div>
+
+                <!-- AG Grid container -->
+                <div id="myGrid" class="ag-theme-alpine" style="flex: 1; min-height: 400px; width: 100%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auth Flags and Row Data via Thymeleaf -->
+    <script>
+        var isAuthenticated = false;
+    </script>
+    
+    <script>
+        var rowData = [];
+    </script>
+
+    <!-- AG Grid Community Core & Styles Local -->
+    <link rel="stylesheet" href="/patch-request-app/vendor/ag-grid/ag-grid.css">
+    <link rel="stylesheet" href="/patch-request-app/vendor/ag-grid/ag-theme-alpine.css">
+    <script src="/patch-request-app/vendor/ag-grid/ag-grid-community.min.js"></script>
+
+    <!-- Initialize AG Grid -->
+    <script src="/patch-request-app/js/ag-grid-init.js"></script>
+</body>
+
+</html>

@@ -9,8 +9,8 @@
     <div class="main-content">
         <div th:replace="~{fragments :: topbar}"></div>
         <div class="content-area">
-            <div class="card" style="max-width: 600px; margin: 0 auto;">
-                <div class="card-title"
+            <div class="card" style="max-width: 600px; margin: 30px auto; width: 100%; flex: 0 0 auto;">
+                <div style="font-size: 1.5rem; font-weight: 600; margin-bottom: 25px; color: #111827; border-bottom: 1px solid #e5e7eb; padding-bottom: 15px;"
                     th:text="${task.id == null ? 'Generate New Patch Number' : 'Edit Patch Request'}">Form</div>
 
                 <form th:action="@{/tasks/save}" th:object="${task}" method="post">
@@ -18,20 +18,26 @@
                     <input type="hidden" th:field="*{patchNumber}" />
 
                     <div class="form-group">
-                        <label class="form-label">Book Type <span style="color:var(--danger-color);">*</span></label>
-                        <div style="display: flex; gap: 15px; margin-top: 5px;">
-                            <label style="display: flex; align-items: center; gap: 5px;"><input type="radio"
-                                    th:field="*{bookType}" value="Open Book" required> Open Book</label>
-                            <label style="display: flex; align-items: center; gap: 5px;"><input type="radio"
-                                    th:field="*{bookType}" value="Closed Book" required> Closed Book</label>
+                        <label class="form-label">Book Type <span style="color:#ef4444;">*</span></label>
+                        <div style="display: flex; gap: 20px; align-items: center; margin-top: 8px; padding-left: 5px;">
+                            <label
+                                style="display: flex; align-items: center; gap: 8px; cursor: pointer; margin: 0;"><input
+                                    type="radio" th:field="*{bookType}" value="Open Book" required
+                                    style="margin:0; width:16px; height:16px;"> Open Book</label>
+                            <label
+                                style="display: flex; align-items: center; gap: 8px; cursor: pointer; margin: 0;"><input
+                                    type="radio" th:field="*{bookType}" value="Closed Book" required
+                                    style="margin:0; width:16px; height:16px;"> Closed Book</label>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">Line Type <span style="color:var(--danger-color);">*</span></label>
-                        <div style="display: flex; gap: 15px; margin-top: 5px;">
-                            <label style="display: flex; align-items: center; gap: 5px;"><input type="radio"
-                                    th:field="*{lineType}" value="RPP1" required> RPP1</label>
+                        <label class="form-label">Line Type <span style="color:#ef4444;">*</span></label>
+                        <div style="display: flex; gap: 20px; align-items: center; margin-top: 8px; padding-left: 5px;">
+                            <label
+                                style="display: flex; align-items: center; gap: 8px; cursor: pointer; margin: 0;"><input
+                                    type="radio" th:field="*{lineType}" value="RPP1" required
+                                    style="margin:0; width:16px; height:16px;"> RPP1</label>
                         </div>
                     </div>
 

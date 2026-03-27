@@ -5,6 +5,133 @@
     <meta charset="UTF-8">
     <title th:text="${title}">App</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        /* Compact layout overrides */
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden !important;
+            display: flex;
+        }
+
+        .sidebar {
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden !important;
+            display: flex;
+            background: #f4f6f9;
+        }
+
+        .sidebar {
+            height: 100vh;
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+
+        .main-content {
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .topbar {
+            flex-shrink: 0;
+            background: #fff;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .content-area {
+            flex: 1;
+            overflow: auto;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            padding: 10px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            width: 100%;
+            transition: border-color 0.2s;
+        }
+
+        .form-control:focus {
+            border-color: #3b82f6;
+            outline: none;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .nav-links li a {
+            padding: 10px 20px;
+            border-radius: 6px;
+            margin: 4px 15px;
+            display: block;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: #4f46e5;
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: #4338ca;
+        }
+
+        .btn-outline {
+            border: 1px solid #d1d5db;
+            background: transparent;
+            color: #374151;
+        }
+
+        .btn-outline:hover {
+            background: #f3f4f6;
+        }
+    </style>
 </head>
 
 <body>
