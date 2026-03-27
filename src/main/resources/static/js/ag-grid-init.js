@@ -1,15 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
     const columnDefs = [
-        { field: "id", headerName: "ID", maxWidth: 90 },
-        { field: "bookType", headerName: "Book Type" },
-        { field: "lineType", headerName: "Line Type", maxWidth: 120 },
-        { field: "taskNumber", headerName: "Task Number" },
-        { field: "requestedBy", headerName: "Requested By" },
         {
-            field: "patchNumber", headerName: "Patch Number", cellRenderer: params => {
+            field: "patchNumber", headerName: "Patch Number", maxWidth: 180, cellRenderer: params => {
                 return params.value ? `<span class="badge badge-info">${params.value}</span>` : '';
             }
         },
+        { field: "patchType", headerName: "Patch Type", maxWidth: 120 },
+        { field: "bookType", headerName: "Book Type", maxWidth: 130 },
+        { field: "taskNumber", headerName: "Task Number" },
+        { field: "requestedBy", headerName: "Requested By" },
+        { field: "taskShortDescription", headerName: "Description" },
         {
             field: "actions", headerName: "Actions", sortable: false, filter: false, maxWidth: 120, cellRenderer: params => {
                 if (isAuthenticated) {
@@ -65,9 +65,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (exportBtn) {
         exportBtn.addEventListener('click', () => {
             if (gridApi) {
-                gridApi.exportDataAsCsv({ fileName: 'patch_requests.csv', columnKeys: ['id', 'bookType', 'lineType', 'taskNumber', 'requestedBy', 'patchNumber'] });
+                gridApi.exportDataAsCsv({ fileName: 'patch_list.csv', columnKeys: ['patchNumber', 'patchType', 'bookType', 'taskNumber', 'requestedBy', 'taskShortDescription'] });
             } else if (gridOptions.api) {
-                gridOptions.api.exportDataAsCsv({ fileName: 'patch_requests.csv', columnKeys: ['id', 'bookType', 'lineType', 'taskNumber', 'requestedBy', 'patchNumber'] });
+                gridOptions.api.exportDataAsCsv({ fileName: 'patch_list.csv', columnKeys: ['patchNumber', 'patchType', 'bookType', 'taskNumber', 'requestedBy', 'taskShortDescription'] });
             }
         });
     }

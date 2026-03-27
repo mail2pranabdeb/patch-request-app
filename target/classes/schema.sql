@@ -17,6 +17,7 @@ CREATE TABLE TOOL_PATCH_CONFIG (
 
 CREATE TABLE TOOL_APP_TASK (
     id NUMBER PRIMARY KEY,
+    patch_type VARCHAR2(100),
     book_type VARCHAR2(100),
     line_type VARCHAR2(100),
     task_number VARCHAR2(255),

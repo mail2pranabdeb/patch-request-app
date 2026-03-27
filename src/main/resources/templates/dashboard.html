@@ -35,8 +35,7 @@
                     <!-- Widget 1 -->
                     <div class="widget-card widget-bg-primary">
                         <div>
-                            <div class="widget-heading">Total Tickets</div>
-                            <div class="widget-subheading">Active Patches Issued</div>
+                            <div class="widget-heading">Total Patch</div>
                         </div>
                         <div class="widget-numbers" th:text="${totalTasks ?: 0}">0</div>
                     </div>
@@ -44,7 +43,7 @@
                     <div class="widget-card widget-bg-success">
                         <div>
                             <div class="widget-heading">Open Books</div>
-                            <div class="widget-subheading">Recently Deployed Configs</div>
+                            <!--<div class="widget-subheading">Recently Deployed Configs</div>-->
                         </div>
                         <div class="widget-numbers" th:text="${openBookPatch ?: 0}">0</div>
                     </div>
@@ -52,7 +51,7 @@
                     <div class="widget-card widget-bg-info">
                         <div>
                             <div class="widget-heading">Closed Books</div>
-                            <div class="widget-subheading">Archival Configs Linked</div>
+                            <!--<div class="widget-subheading">Archival Configs Linked</div>-->
                         </div>
                         <div class="widget-numbers" th:text="${closedBookPatch ?: 0}">0</div>
                     </div>

@@ -1,26 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head th:replace="~{fragments :: head('Patch Request Form - Patch Number Generation App')}"></head>
-
 <body>
     <div th:replace="~{fragments :: topbar}"></div>
-
+    
     <div class="app-container">
         <div th:replace="~{fragments :: sidebar('new')}"></div>
-
+        
         <div class="main-wrapper">
             <div class="app-page-title">
                 <div class="page-title-heading">
                     <div class="page-title-icon" style="color: var(--success);">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M12 5v14M5 12h14" />
-                        </svg>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
                     </div>
                     <div class="page-title-text">
-                        <h2 th:text="${task.id == null ? 'Generate New Patch Number' : 'Edit Patch Request'}">Patch Form
-                        </h2>
+                        <h2 th:text="${task.id == null ? 'Generate New Patch Number' : 'Edit Patch Request'}">Patch Form</h2>
                         <p>Fill in the required Datafix metrics below to build or update a system configuration.</p>
                     </div>
                 </div>
@@ -32,64 +26,61 @@
                         <form th:action="@{/tasks/save}" th:object="${task}" method="post">
                             <input type="hidden" th:field="*{id}" />
                             <input type="hidden" th:field="*{patchNumber}" />
-
+                            
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                <!-- Patch Type (new field) -->
                                 <div class="form-group">
-                                    <label class="form-label">Book Type <span
-                                            style="color:var(--danger);">*</span></label>
+                                    <label class="form-label">Patch Type <span style="color:var(--danger);">*</span></label>
                                     <div style="display: flex; gap: 15px; align-items: center; margin-top: 3px;">
                                         <label class="radio-tile">
-                                            <input type="radio" th:field="*{bookType}" value="Open Book" required
-                                                style="width:14px; height:14px;"> Open Book
+                                            <input type="radio" th:field="*{patchType}" value="Datafix"
+                                                th:checked="${task.patchType == null or task.patchType == '' or task.patchType == 'Datafix'}"
+                                                required style="width:14px; height:14px;"> Datafix
                                         </label>
                                         <label class="radio-tile">
-                                            <input type="radio" th:field="*{bookType}" value="Closed Book" required
-                                                style="width:14px; height:14px;"> Closed Book
+                                            <input type="radio" th:field="*{patchType}" value="Code Fix"
+                                                style="width:14px; height:14px;"> Code Fix
                                         </label>
                                     </div>
                                 </div>
 
+                                <!-- Book Type -->
                                 <div class="form-group">
-                                    <label class="form-label">Line Type <span
-                                            style="color:var(--danger);">*</span></label>
+                                    <label class="form-label">Book Type <span style="color:var(--danger);">*</span></label>
                                     <div style="display: flex; gap: 15px; align-items: center; margin-top: 3px;">
                                         <label class="radio-tile">
-                                            <input type="radio" th:field="*{lineType}" value="RPP1" required
-                                                style="width:14px; height:14px;"> Default RPP1
+                                            <input type="radio" th:field="*{bookType}" value="Open Book" required style="width:14px; height:14px;"> Open Book
+                                        </label>
+                                        <label class="radio-tile">
+                                            <input type="radio" th:field="*{bookType}" value="Closed Book" required style="width:14px; height:14px;"> Closed Book
                                         </label>
                                     </div>
                                 </div>
-
+                                
+                                <!-- Task Number -->
                                 <div class="form-group">
-                                    <label class="form-label">Task Number <span
-                                            style="color:var(--danger);">*</span></label>
-                                    <input type="text" class="form-control" th:field="*{taskNumber}" required
-                                        placeholder="e.g., TSK-9391">
+                                    <label class="form-label">Task Number <span style="color:var(--danger);">*</span></label>
+                                    <input type="text" class="form-control" th:field="*{taskNumber}" required placeholder="e.g., TSK-9391">
                                 </div>
-
+                                
+                                <!-- Requested By -->
                                 <div class="form-group">
-                                    <label class="form-label">Requested By <span
-                                            style="color:var(--danger);">*</span></label>
-                                    <input type="text" class="form-control" th:field="*{requestedBy}" required
-                                        placeholder="Your name or team identifier">
+                                    <label class="form-label">Requested By <span style="color:var(--danger);">*</span></label>
+                                    <input type="text" class="form-control" th:field="*{requestedBy}" required placeholder="Your name or team identifier">
                                 </div>
-
+                                
+                                <!-- Short Description (full width) -->
                                 <div class="form-group" style="grid-column: 1 / -1;">
-                                    <label class="form-label">Short Description <span
-                                            style="color:var(--danger);">*</span></label>
-                                    <input type="text" class="form-control" th:field="*{taskShortDescription}" required
-                                        placeholder="Brief description of the patch objective">
+                                    <label class="form-label">Short Description <span style="color:var(--danger);">*</span></label>
+                                    <input type="text" class="form-control" th:field="*{taskShortDescription}" required placeholder="Brief description of the patch objective">
                                 </div>
                             </div>
-
-                            <div
-                                style="margin-top: 15px; display: flex; gap: 10px; padding-top: 10px; border-top: 1px solid rgba(26,54,126,0.1);">
+                            
+                            <div style="margin-top: 15px; display: flex; gap: 10px; padding-top: 10px; border-top: 1px solid rgba(26,54,126,0.1);">
                                 <button type="submit" class="btn btn-primary" style="flex:1; padding: 0.4rem;">
-                                    <span
-                                        th:text="${task.id == null ? 'Generate Patch & Save' : 'Update Record'}">Save</span>
+                                    <span th:text="${task.id == null ? 'Generate Patch & Save' : 'Update Record'}">Save</span>
                                 </button>
-                                <a th:href="@{/tasks}" class="btn btn-outline" style="flex:1; padding: 0.4rem;">Cancel /
-                                    Return</a>
+                                <a th:href="@{/tasks}" class="btn btn-outline" style="flex:1; padding: 0.4rem;">Cancel / Return</a>
                             </div>
                         </form>
                     </div>
@@ -98,5 +89,4 @@
         </div>
     </div>
 </body>
-
 </html>

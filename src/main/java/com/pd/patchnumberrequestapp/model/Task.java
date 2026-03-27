@@ -2,6 +2,7 @@ package com.pd.patchnumberrequestapp.model;
 
 public class Task {
     private Long id;
+    private String patchType;
     private String bookType;
     private String lineType;
     private String taskNumber;
@@ -12,7 +13,8 @@ public class Task {
     public Task() {
     }
 
-    public Task(String bookType, String lineType, String taskNumber, String taskShortDescription, String requestedBy, String patchNumber) {
+    public Task(String patchType, String bookType, String lineType, String taskNumber, String taskShortDescription, String requestedBy, String patchNumber) {
+        this.patchType = patchType;
         this.bookType = bookType;
         this.lineType = lineType;
         this.taskNumber = taskNumber;
@@ -27,6 +29,14 @@ public class Task {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getPatchType() {
+        return patchType;
+    }
+
+    public void setPatchType(String patchType) {
+        this.patchType = patchType;
     }
 
     public String getBookType() {
