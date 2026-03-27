@@ -96,6 +96,11 @@ public class Task {
         this.createdAt = createdAt;
     }
 
+    public String getFormattedCreatedAt() {
+        if (createdAt == null) return "Legacy Record";
+        return createdAt.format(java.time.format.DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm:ss"));
+    }
+
     @Override
     public String toString() {
         return "Task{" +

@@ -19,17 +19,24 @@ public class TaskRepository {
     private final RowMapper<Task> rowMapper = (rs, rowNum) -> {
         Task task = new Task();
         task.setId(rs.getLong("id"));
-        try { task.setPatchType(rs.getString("patch_type")); } catch (Exception e) {}
+        
+        java.sql.ResultSetMetaData meta = rs.getMetaData();
+        int count = meta.getColumnCount();
+        java.util.Set<String> cols = new java.util.HashSet<>();
+        for (int i = 1; i <= count; i++) cols.add(meta.getColumnName(i).toUpperCase());
+
+        if (cols.contains("PATCH_TYPE")) task.setPatchType(rs.getString("patch_type"));
         task.setBookType(rs.getString("book_type"));
         task.setLineType(rs.getString("line_type"));
         task.setTaskNumber(rs.getString("task_number"));
         task.setTaskShortDescription(rs.getString("task_short_description"));
         task.setRequestedBy(rs.getString("requested_by"));
         task.setPatchNumber(rs.getString("patch_number"));
-        try {
+        
+        if (cols.contains("CREATED_AT")) {
             java.sql.Timestamp ts = rs.getTimestamp("created_at");
             if (ts != null) task.setCreatedAt(ts.toLocalDateTime());
-        } catch (Exception e) {}
+        }
         return task;
     };
 

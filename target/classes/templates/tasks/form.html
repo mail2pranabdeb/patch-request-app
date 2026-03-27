@@ -116,7 +116,7 @@
                             <div th:if="${task.id != null}" style="margin-top: 15px; padding: 10px 0; border-top: 1px dashed var(--border); display: flex; align-items: center; gap: 10px;">
                                 <div style="color: var(--text-muted); font-size: 0.8rem; font-weight: 500;">SYSTEM AUDIT:</div>
                                 <div style="color: var(--text-main); font-size: 0.85rem;">
-                                    Created on <span th:text="${task.createdAt != null ? #temporals.format(task.createdAt, 'dd-MMM-yyyy HH:mm:ss') : 'Legacy Record'}"></span>
+                                    Created on <span th:text="${task.formattedCreatedAt}"></span>
                                 </div>
                             </div>
 
