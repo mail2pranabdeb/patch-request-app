@@ -32,7 +32,6 @@
                         <form th:action="@{/tasks/save}" th:object="${task}" method="post">
                             <input type="hidden" th:field="*{id}" />
                             <input type="hidden" th:field="*{patchNumber}" />
-                            <input type="hidden" th:field="*{lineType}" />
 
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
                                 <!-- Patch Type (new field) -->
@@ -63,6 +62,22 @@
                                         <label class="radio-tile">
                                             <input type="radio" th:field="*{bookType}" value="Closed Book" required
                                                 style="width:14px; height:14px;"> Closed Book
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Line Type -->
+                                <div class="form-group">
+                                    <label class="form-label">Line Type <span
+                                            style="color:var(--danger);">*</span></label>
+                                    <div style="display: flex; gap: 15px; align-items: center; margin-top: 3px;">
+                                        <label class="radio-tile">
+                                            <input type="radio" th:field="*{lineType}" value="RPP1" required
+                                                style="width:14px; height:14px;"> RPP1
+                                        </label>
+                                        <label class="radio-tile">
+                                            <input type="radio" th:field="*{lineType}" value="RPP2"
+                                                style="width:14px; height:14px;"> RPP2
                                         </label>
                                     </div>
                                 </div>
