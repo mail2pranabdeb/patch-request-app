@@ -43,9 +43,9 @@
                                             <input type="radio" th:field="*{patchType}" value="Datafix" required
                                                 style="width:14px; height:14px;"> Datafix
                                         </label>
-                                        <label class="radio-tile">
-                                            <input type="radio" th:field="*{patchType}" value="Code Fix"
-                                                style="width:14px; height:14px;"> Code Fix
+                                        <label class="radio-tile" title="For future use (Current: Datafix only)">
+                                            <input type="radio" th:field="*{patchType}" value="Code Fix" disabled
+                                                style="width:14px; height:14px; opacity: 0.5;"> <span style="color: var(--text-muted);">Code Fix</span>
                                         </label>
                                     </div>
                                 </div>
@@ -75,13 +75,13 @@
                                             <input type="radio" th:field="*{lineType}" value="RPP1" required
                                                 style="width:14px; height:14px;"> RPP1
                                         </label>
-                                        <label class="radio-tile">
-                                            <input type="radio" th:field="*{lineType}" value="RPP2"
-                                                style="width:14px; height:14px;"> RPP2
+                                        <label class="radio-tile" title="For future use (Current: RPP1 only)">
+                                            <input type="radio" th:field="*{lineType}" value="RPP2" disabled
+                                                style="width:14px; height:14px; opacity: 0.5;"> <span style="color: var(--text-muted);">RPP2</span>
                                         </label>
-                                        <label class="radio-tile">
-                                            <input type="radio" th:field="*{lineType}" value="RPP3"
-                                                style="width:14px; height:14px;"> RPP3
+                                        <label class="radio-tile" title="For future use (Current: RPP1 only)">
+                                            <input type="radio" th:field="*{lineType}" value="RPP3" disabled
+                                                style="width:14px; height:14px; opacity: 0.5;"> <span style="color: var(--text-muted);">RPP3</span>
                                         </label>
                                     </div>
                                 </div>
