@@ -49,7 +49,7 @@ public class TaskController {
 
     @PostMapping("/tasks/save")
     public String saveTask(@ModelAttribute Task task, RedirectAttributes redirectAttributes) {
-        if (task.getBookType() == null || task.getLineType() == null || task.getTaskNumber() == null
+        if (task.getPatchType() == null || task.getBookType() == null || task.getLineType() == null || task.getTaskNumber() == null
                 || task.getTaskShortDescription() == null || task.getRequestedBy() == null) {
             return "tasks/form";
         }

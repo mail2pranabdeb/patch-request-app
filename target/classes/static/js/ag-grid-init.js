@@ -12,10 +12,16 @@ document.addEventListener('DOMContentLoaded', () => {
         { field: "taskShortDescription", headerName: "Description" },
         {
             field: "actions", headerName: "Actions", sortable: false, filter: false, maxWidth: 120, cellRenderer: params => {
+                // Get base path and ensure no double slashes, but keep leading slash
+                let base = contextPath || '/';
+                if (!base.endsWith('/')) base += '/';
+                const editUrl = (base + "tasks/edit/" + params.data.id).replace(/\/+/g, '/');
+                const deleteUrl = (base + "tasks/delete/" + params.data.id).replace(/\/+/g, '/');
+                
                 if (isAuthenticated) {
                     return `
-                    <a href="/patch-request-app/tasks/edit/${params.data.id}" class="btn btn-outline" style="padding:2px 6px;" title="Edit"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></a>
-                    <a href="/patch-request-app/tasks/delete/${params.data.id}" class="btn btn-danger" style="padding:2px 6px;" onclick="return confirm('Delete this request?');" title="Delete"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></a>
+                    <a href="${editUrl}" class="btn btn-outline" style="padding:2px 6px;" title="Edit"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></a>
+                    <a href="${deleteUrl}" class="btn btn-danger" style="padding:2px 6px;" onclick="return confirm('Delete this request?');" title="Delete"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></a>
                 `;
                 } else {
                     return `<span class="badge" style="color:var(--text-muted);" title="Login to edit"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>`;
