@@ -4,41 +4,55 @@
 <head>
     <meta charset="UTF-8">
     <title>Login - PatchReq</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <!-- Cache buster appended to apply new redesign robustly -->
+    <link rel="stylesheet" th:href="@{/css/style.css(v=3.0)}">
 </head>
 
 <body class="login-body">
     <div class="login-card">
-        <h2><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary-color)" stroke-width="2">
+        <div class="login-logo">
+            <svg width="54" height="54" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-            </svg> PatchReq</h2>
-
-        <div th:if="${param.error}" class="login-alert">
-            Invalid username or password.
+            </svg>
+            <h2
+                style="margin-top:20px; font-weight:800; color:var(--text-main); font-size: 1.7rem; letter-spacing: -0.03em;">
+                Welcome Back</h2>
+            <p style="color:var(--text-muted); font-size:0.95rem; margin-top:8px;">Sign in to access secure
+                configurations</p>
         </div>
-        <div th:if="${param.logout}" class="login-alert" style="background:#d1fae5; color:#065f46;">
-            You have been logged out.
+
+        <div th:if="${param.error}"
+            style="margin-bottom:25px; padding:16px; background:#fef2f2; color:var(--danger); border-radius:10px; font-size:0.95rem; text-align:center; border: 1px solid #fecaca; font-weight: 500;">
+            Invalid credentials provided
+        </div>
+        <div th:if="${param.logout}"
+            style="margin-bottom:25px; padding:16px; background:#f0fdf4; color:#059669; border-radius:10px; font-size:0.95rem; text-align:center; border: 1px solid #10b981; font-weight: 500;">
+            You've logged out successfully
         </div>
 
         <form th:action="@{/login}" method="post">
-            <div class="form-group" style="text-align:left;">
-                <label class="form-label">Username</label>
-                <input type="text" name="username" class="form-control" required autofocus placeholder="Try 'admin'">
+            <div class="form-group" style="margin-bottom: 20px;">
+                <label class="form-label" style="font-size: 0.9rem;">Administrator Username</label>
+                <input type="text" name="username" class="form-control" style="padding: 14px 16px;" required autofocus
+                    placeholder="e.g., admin">
             </div>
-            <div class="form-group" style="text-align:left; margin-bottom: 25px;">
-                <label class="form-label">Password</label>
-                <input type="password" name="password" class="form-control" required placeholder="Try 'admin'">
+            <div class="form-group" style="margin-bottom: 25px;">
+                <label class="form-label" style="font-size: 0.9rem;">Secure Password</label>
+                <input type="password" name="password" class="form-control" style="padding: 14px 16px;" required
+                    placeholder="••••••••">
             </div>
-            <button type="submit" class="btn btn-primary" style="width:100%; padding:12px; font-size:1rem;">Sign
-                In</button>
+            <button type="submit" class="btn btn-primary"
+                style="width:100%; padding:16px; font-size:1.05rem; margin-top:10px; box-shadow: 0 8px 15px -3px rgba(99, 102, 241, 0.4);">
+                Authenticate Session
+            </button>
         </form>
-
-        <div style="margin-top: 20px;">
+        <div style="text-align:center; margin-top:35px; border-top: 1px solid var(--border); padding-top: 25px;">
             <a th:href="@{/}"
-                style="color:var(--text-muted); text-decoration:none; font-size:0.875rem; display:flex; align-items:center; justify-content:center; gap:6px;"><svg
-                    width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M19 12H5M12 19l-7-7 7-7" />
-                </svg> Back to Dashboard</a>
+                style="color:var(--primary); text-decoration:none; font-size:0.95rem; font-weight:600; display: inline-flex; align-items: center; gap: 6px; transition: color 0.2s;"><svg
+                    width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg> Return to Public Dashboard</a>
         </div>
     </div>
 </body>
