@@ -40,6 +40,7 @@ public class TaskController {
     @GetMapping("/tasks/new")
     public String newTaskForm(Model model) {
         Task task = new Task();
+        task.setPatchType("Datafix");
         task.setBookType("Open Book");
         task.setLineType("RPP1");
         model.addAttribute("task", task);
