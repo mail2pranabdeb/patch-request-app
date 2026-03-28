@@ -45,7 +45,8 @@
                                         </label>
                                         <label class="radio-tile" title="For future use (Current: Datafix only)">
                                             <input type="radio" th:field="*{patchType}" value="Code Fix" disabled
-                                                style="width:14px; height:14px; opacity: 0.5;"> <span style="color: var(--text-muted);">Code Fix</span>
+                                                style="width:14px; height:14px; opacity: 0.5;"> <span
+                                                style="color: var(--text-muted);">Code Fix</span>
                                         </label>
                                     </div>
                                 </div>
@@ -76,11 +77,13 @@
                                         </label>
                                         <label class="radio-tile" title="For future use (Current: RPP1 only)">
                                             <input type="radio" th:field="*{lineType}" value="RPP2" disabled
-                                                style="width:14px; height:14px; opacity: 0.5;"> <span style="color: var(--text-muted);">RPP2</span>
+                                                style="width:14px; height:14px; opacity: 0.5;"> <span
+                                                style="color: var(--text-muted);">RPP2</span>
                                         </label>
                                         <label class="radio-tile" title="For future use (Current: RPP1 only)">
                                             <input type="radio" th:field="*{lineType}" value="RPP3" disabled
-                                                style="width:14px; height:14px; opacity: 0.5;"> <span style="color: var(--text-muted);">RPP3</span>
+                                                style="width:14px; height:14px; opacity: 0.5;"> <span
+                                                style="color: var(--text-muted);">RPP3</span>
                                         </label>
                                     </div>
                                 </div>
@@ -106,14 +109,16 @@
                                     <label class="form-label">Short Description <span
                                             style="color:var(--danger);">*</span></label>
                                     <textarea class="form-control" th:field="*{taskShortDescription}" required
-                                        placeholder="Brief description of the patch objective" rows="3"
+                                        placeholder="Brief description of the patch objective" rows="10"
                                         style="resize: vertical;"></textarea>
                                 </div>
                             </div>
 
                             <!-- Audit info -->
-                            <div th:if="${task.id != null}" style="margin-top: 15px; padding: 10px 0; border-top: 1px dashed var(--border); display: flex; align-items: center; gap: 10px;">
-                                <div style="color: var(--text-muted); font-size: 0.8rem; font-weight: 500;">SYSTEM AUDIT:</div>
+                            <div th:if="${task.id != null}"
+                                style="margin-top: 15px; padding: 10px 0; border-top: 1px dashed var(--border); display: flex; align-items: center; gap: 10px;">
+                                <div style="color: var(--text-muted); font-size: 0.8rem; font-weight: 500;">SYSTEM
+                                    AUDIT:</div>
                                 <div style="color: var(--text-main); font-size: 0.85rem;">
                                     Created on <span th:text="${task.formattedCreatedAt}"></span>
                                 </div>
