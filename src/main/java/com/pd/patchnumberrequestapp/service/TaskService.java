@@ -41,12 +41,11 @@ public class TaskService {
             
             Long nextVal = 0L;
             
-            String catPrefix = "";
-            String fixedStr = "";
+            String format = "";
+            String lastDeployed = "";
             String patchType = task.getPatchType() != null ? task.getPatchType() : "Code Fix";
             
             if ("Open Book".equalsIgnoreCase(bookType)) {
-                catPrefix = "RPP";
                 if ("RPP1".equalsIgnoreCase(lineType)) {
                     nextVal = config.getOpenBookRPP1() + 1;
                     config.setOpenBookRPP1(nextVal);
@@ -57,11 +56,11 @@ public class TaskService {
                     nextVal = config.getOpenBookRPP3() + 1;
                     config.setOpenBookRPP3(nextVal);
                 }
-                fixedStr = "Datafix".equalsIgnoreCase(patchType) ? 
-                           config.getOpenBookDatafixPatchFormat() : 
-                           config.getOpenBookCodefixPatchFormat();
+                format = "Datafix".equalsIgnoreCase(patchType) ? 
+                         config.getOpenBookDatafixPatchFormat() : 
+                         config.getOpenBookCodefixPatchFormat();
+                lastDeployed = config.getOpenBookLastDeployedPatch();
             } else if ("Migration".equalsIgnoreCase(bookType)) {
-                catPrefix = "Max";
                 if ("RPP1".equalsIgnoreCase(lineType)) {
                     nextVal = config.getMaxMigRPP1() + 1;
                     config.setMaxMigRPP1(nextVal);
@@ -72,11 +71,11 @@ public class TaskService {
                     nextVal = config.getMaxMigRPP3() + 1;
                     config.setMaxMigRPP3(nextVal);
                 }
-                fixedStr = "Datafix".equalsIgnoreCase(patchType) ? 
-                           config.getMaxMigDatafixPatchFormat() : 
-                           config.getMaxMigCodefixPatchFormat();
+                format = "Datafix".equalsIgnoreCase(patchType) ? 
+                         config.getMaxMigDatafixPatchFormat() : 
+                         config.getMaxMigCodefixPatchFormat();
+                lastDeployed = config.getMaxMigLastDeployedPatch();
             } else {
-                catPrefix = "Mig";
                 if ("RPP1".equalsIgnoreCase(lineType)) {
                     nextVal = config.getClosedBookRPP1() + 1;
                     config.setClosedBookRPP1(nextVal);
@@ -87,22 +86,32 @@ public class TaskService {
                     nextVal = config.getClosedBookRPP3() + 1;
                     config.setClosedBookRPP3(nextVal);
                 }
-                fixedStr = "Datafix".equalsIgnoreCase(patchType) ? 
-                           config.getClosedBookDatafixPatchFormat() : 
-                           config.getClosedBookCodefixPatchFormat();
+                format = "Datafix".equalsIgnoreCase(patchType) ? 
+                         config.getClosedBookDatafixPatchFormat() : 
+                         config.getClosedBookCodefixPatchFormat();
+                lastDeployed = config.getClosedBookLastDeployedPatch();
             }
             
             patchConfigRepository.updateConfig(config);
             
-            // Format: [PREFIX]_[FIXEDSTRING]_[3DIGITSEQUENCE]_[yyyymmdd]
-            String dateStr = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-            String patchNumber = String.format("%s_%s_%03d_%s", 
-                                              catPrefix, 
-                                              (fixedStr != null ? fixedStr : ""), 
-                                              nextVal, 
-                                              dateStr);
-            task.setPatchNumber(patchNumber);
+            if (format == null || format.isEmpty()) {
+                format = "PATCH_$3DIGITSEQUENCE$";
+            }
             
+            String dateStr = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+            String seqStr = String.format("%03d", nextVal);
+            
+            String patchNumber = format;
+            patchNumber = patchNumber.replace("$3DIGITSEQUENCE$", seqStr);
+            patchNumber = patchNumber.replace("$YYYMMDD$", dateStr);
+            patchNumber = patchNumber.replace("$LASTDEPLOYEDPATCH$", (lastDeployed != null ? lastDeployed : "NONE"));
+            
+            // Fallback if no tokens were replaced (old style)
+            if (patchNumber.equals(format)) {
+                patchNumber = format + "_" + seqStr + "_" + dateStr;
+            }
+            
+            task.setPatchNumber(patchNumber);
             taskRepository.save(task); 
         } else {
             taskRepository.save(task);
