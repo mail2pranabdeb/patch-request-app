@@ -3,7 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             field: "patchNumber", 
             headerName: "Patch Number", 
-            minWidth: 280,
+            minWidth: 350,
+            flex: 2,
             cellRenderer: params => {
                 return params.value ? `<span class="badge badge-info" style="font-size: 0.95rem; padding: 4px 10px; font-weight: 700;">${params.value}</span>` : '';
             }
@@ -43,6 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         rowData: rowData,
         pagination: true,
         paginationPageSize: 10,
+        paginationPageSizeSelector: [10, 20, 50, 100],
         defaultColDef: {
             sortable: true,
             filter: true,

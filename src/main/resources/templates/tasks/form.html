@@ -39,14 +39,18 @@
                                     <label class="form-label">Patch Type <span
                                             style="color:var(--danger);">*</span></label>
                                     <div style="display: flex; gap: 15px; align-items: center; margin-top: 3px;">
-                                        <label class="radio-tile">
+                                        <label class="radio-tile" th:style="${task.id != null ? 'opacity:0.7;' : ''}">
                                             <input type="radio" th:field="*{patchType}" value="Datafix" required
+                                                th:disabled="${task.id != null}"
                                                 style="width:14px; height:14px;"> Datafix
                                         </label>
-                                        <label class="radio-tile">
+                                        <label class="radio-tile" th:style="${task.id != null ? 'opacity:0.7;' : ''}">
                                             <input type="radio" th:field="*{patchType}" value="CodeFix" required
+                                                th:disabled="${task.id != null}"
                                                 style="width:14px; height:14px;"> CodeFix
                                         </label>
+                                        <!-- Keep values in POST if disabled -->
+                                        <input type="hidden" th:if="${task.id != null}" th:field="*{patchType}" />
                                     </div>
                                 </div>
 
@@ -55,18 +59,22 @@
                                     <label class="form-label">Book Type <span
                                             style="color:var(--danger);">*</span></label>
                                     <div style="display: flex; gap: 15px; align-items: center; margin-top: 3px;">
-                                        <label class="radio-tile">
+                                        <label class="radio-tile" th:style="${task.id != null ? 'opacity:0.7;' : ''}">
                                             <input type="radio" th:field="*{bookType}" value="Open Book" required
+                                                th:disabled="${task.id != null}"
                                                 style="width:14px; height:14px;"> Open Book
                                         </label>
-                                        <label class="radio-tile">
+                                        <label class="radio-tile" th:style="${task.id != null ? 'opacity:0.7;' : ''}">
                                             <input type="radio" th:field="*{bookType}" value="Closed Book" required
+                                                th:disabled="${task.id != null}"
                                                 style="width:14px; height:14px;"> Closed Book
                                         </label>
-                                        <label class="radio-tile">
+                                        <label class="radio-tile" th:style="${task.id != null ? 'opacity:0.7;' : ''}">
                                             <input type="radio" th:field="*{bookType}" value="Migration" required
+                                                th:disabled="${task.id != null}"
                                                 style="width:14px; height:14px;"> Max Migration
                                         </label>
+                                        <input type="hidden" th:if="${task.id != null}" th:field="*{bookType}" />
                                     </div>
                                 </div>
 
@@ -74,18 +82,22 @@
                                     <label class="form-label">Line Type <span
                                             style="color:var(--danger);">*</span></label>
                                     <div style="display: flex; gap: 15px; align-items: center; margin-top: 3px;">
-                                        <label class="radio-tile">
+                                        <label class="radio-tile" th:style="${task.id != null ? 'opacity:0.7;' : ''}">
                                             <input type="radio" th:field="*{lineType}" value="RPP1" required
+                                                th:disabled="${task.id != null}"
                                                 style="width:14px; height:14px;"> RPP1
                                         </label>
-                                        <label class="radio-tile">
+                                        <label class="radio-tile" th:style="${task.id != null ? 'opacity:0.7;' : ''}">
                                             <input type="radio" th:field="*{lineType}" value="RPP2" required
+                                                th:disabled="${task.id != null}"
                                                 style="width:14px; height:14px;"> RPP2
                                         </label>
-                                        <label class="radio-tile">
+                                        <label class="radio-tile" th:style="${task.id != null ? 'opacity:0.7;' : ''}">
                                             <input type="radio" th:field="*{lineType}" value="RPP3" required
+                                                th:disabled="${task.id != null}"
                                                 style="width:14px; height:14px;"> RPP3
                                         </label>
+                                        <input type="hidden" th:if="${task.id != null}" th:field="*{lineType}" />
                                     </div>
                                 </div>
 
@@ -140,6 +152,39 @@
             </div>
         </div>
     </div>
+    <script th:inline="javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            const patchTypeRadios = document.querySelectorAll('input[name="patchType"]');
+            const lineTypeRPP1 = document.querySelector('input[name="lineType"][value="RPP1"]');
+            const lineTypeRPP2 = document.querySelector('input[name="lineType"][value="RPP2"]');
+            const lineTypeRPP3 = document.querySelector('input[name="lineType"][value="RPP3"]');
+
+            function toggleLineType() {
+                const selectedType = document.querySelector('input[name="patchType"]:checked').value;
+                if (selectedType === 'Datafix') {
+                    // For datafix, only RPP1 is allowed
+                    lineTypeRPP1.checked = true;
+                    lineTypeRPP2.disabled = true;
+                    lineTypeRPP3.disabled = true;
+                    lineTypeRPP2.parentElement.style.opacity = '0.5';
+                    lineTypeRPP3.parentElement.style.opacity = '0.5';
+                } else {
+                    // For CodeFix, all are enabled
+                    lineTypeRPP2.disabled = false;
+                    lineTypeRPP3.disabled = false;
+                    lineTypeRPP2.parentElement.style.opacity = '1';
+                    lineTypeRPP3.parentElement.style.opacity = '1';
+                }
+            }
+
+            patchTypeRadios.forEach(radio => {
+                radio.addEventListener('change', toggleLineType);
+            });
+
+            // Run on initial load
+            toggleLineType();
+        });
+    </script>
 </body>
 
 </html>

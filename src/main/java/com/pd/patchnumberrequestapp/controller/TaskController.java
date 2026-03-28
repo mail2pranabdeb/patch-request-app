@@ -62,7 +62,7 @@ public class TaskController {
                     "Successfully generated Patch Number: " + task.getPatchNumber());
         } else {
             redirectAttributes.addFlashAttribute("successMessage",
-                    "Successfully updated Patch Request ID: " + task.getId());
+                    "Successfully updated Patch Number: " + task.getPatchNumber());
         }
         return "redirect:/tasks";
     }
