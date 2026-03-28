@@ -18,23 +18,23 @@ public class TaskRepository {
 
     private final RowMapper<Task> rowMapper = (rs, rowNum) -> {
         Task task = new Task();
-        task.setId(rs.getLong("id"));
+        task.setId(rs.getLong("ID"));
         
         java.sql.ResultSetMetaData meta = rs.getMetaData();
         int count = meta.getColumnCount();
         java.util.Set<String> cols = new java.util.HashSet<>();
         for (int i = 1; i <= count; i++) cols.add(meta.getColumnName(i).toUpperCase());
 
-        if (cols.contains("PATCH_TYPE")) task.setPatchType(rs.getString("patch_type"));
-        task.setBookType(rs.getString("book_type"));
-        task.setLineType(rs.getString("line_type"));
-        task.setTaskNumber(rs.getString("task_number"));
-        task.setTaskShortDescription(rs.getString("task_short_description"));
-        task.setRequestedBy(rs.getString("requested_by"));
-        task.setPatchNumber(rs.getString("patch_number"));
+        if (cols.contains("PATCH_TYPE")) task.setPatchType(rs.getString("PATCH_TYPE"));
+        task.setBookType(rs.getString("BOOK_TYPE"));
+        task.setLineType(rs.getString("LINE_TYPE"));
+        task.setTaskNumber(rs.getString("TASK_NUMBER"));
+        task.setTaskShortDescription(rs.getString("TASK_SHORT_DESCRIPTION"));
+        task.setRequestedBy(rs.getString("REQUESTED_BY"));
+        task.setPatchNumber(rs.getString("PATCH_NUMBER"));
         
         if (cols.contains("CREATED_AT")) {
-            java.sql.Timestamp ts = rs.getTimestamp("created_at");
+            java.sql.Timestamp ts = rs.getTimestamp("CREATED_AT");
             if (ts != null) task.setCreatedAt(ts.toLocalDateTime());
         }
         return task;

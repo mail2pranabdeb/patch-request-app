@@ -1,23 +1,31 @@
 document.addEventListener('DOMContentLoaded', () => {
     const columnDefs = [
         {
-            field: "patchNumber", headerName: "Patch Number", maxWidth: 180, cellRenderer: params => {
-                return params.value ? `<span class="badge badge-info">${params.value}</span>` : '';
+            field: "patchNumber", 
+            headerName: "Patch Number", 
+            minWidth: 280,
+            cellRenderer: params => {
+                return params.value ? `<span class="badge badge-info" style="font-size: 0.95rem; padding: 4px 10px; font-weight: 700;">${params.value}</span>` : '';
             }
         },
         { field: "patchType", headerName: "Patch Type", maxWidth: 120 },
         { field: "bookType", headerName: "Book Type", maxWidth: 130 },
         { field: "taskNumber", headerName: "Task Number" },
         { field: "requestedBy", headerName: "Requested By" },
-        { field: "taskShortDescription", headerName: "Description" },
+        { field: "taskShortDescription", headerName: "Description", hide: true },
         {
             field: "actions", headerName: "Actions", sortable: false, filter: false, maxWidth: 120, cellRenderer: params => {
                 // Get base path and ensure no double slashes, but keep leading slash
                 let base = contextPath || '/';
                 if (!base.endsWith('/')) base += '/';
-                const editUrl = (base + "tasks/edit/" + params.data.id).replace(/\/+/g, '/');
-                const deleteUrl = (base + "tasks/delete/" + params.data.id).replace(/\/+/g, '/');
+                const rowId = params.data.id || params.data.ID;
                 
+                // Construct clean URLs
+                const editUrl = (base + "tasks/edit/" + rowId).replace(/\/+/g, '/').replace(':/', '://');
+                const deleteUrl = (base + "tasks/delete/" + rowId).replace(/\/+/g, '/').replace(':/', '://');
+
+                console.log('Action Click:', { rowId, editUrl, deleteUrl });
+
                 if (isAuthenticated) {
                     return `
                     <a href="${editUrl}" class="btn btn-outline" style="padding:2px 6px;" title="Edit"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></a>
@@ -71,14 +79,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (exportBtn) {
         exportBtn.addEventListener('click', () => {
             if (gridApi) {
-                gridApi.exportDataAsCsv({ 
-                    fileName: 'patch_list.csv', 
+                gridApi.exportDataAsCsv({
+                    fileName: 'patch_list.csv',
                     columnKeys: ['patchNumber', 'patchType', 'bookType', 'taskNumber', 'requestedBy', 'taskShortDescription'],
-                    suppressQuotes: true 
+                    suppressQuotes: true
                 });
             } else if (gridOptions.api) {
-                gridOptions.api.exportDataAsCsv({ 
-                    fileName: 'patch_list.csv', 
+                gridOptions.api.exportDataAsCsv({
+                    fileName: 'patch_list.csv',
                     columnKeys: ['patchNumber', 'patchType', 'bookType', 'taskNumber', 'requestedBy', 'taskShortDescription'],
                     suppressQuotes: true
                 });

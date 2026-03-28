@@ -9,9 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class TaskService {
@@ -36,106 +34,72 @@ public class TaskService {
     public void saveTask(Task task) {
         if (task.getId() == null && (task.getPatchNumber() == null || task.getPatchNumber().isEmpty())) {
             PatchConfig config = patchConfigRepository.getConfig();
-            if (config == null)
-                config = new PatchConfig();
+            if (config == null) config = new PatchConfig();
 
             String bookType = task.getBookType() != null ? task.getBookType() : "Open Book";
             String lineType = task.getLineType() != null ? task.getLineType() : "RPP1";
+            String patchType = task.getPatchType() != null ? task.getPatchType() : "CodeFix";
 
-            Long nextVal = 0L;
-
+            // Hierarchy parts
+            String prefix = "";
+            String fixStr = "";
+            String major = "";
+            String minor = "";
+            String seriesStr = "";
             String lastDeployed = "";
-            String series = "";
-            String fixedStrVal = "";
-            String patchType = task.getPatchType() != null ? task.getPatchType() : "Code Fix";
 
             if ("Open Book".equalsIgnoreCase(bookType)) {
-                if ("RPP1".equalsIgnoreCase(lineType)) {
-                    nextVal = config.getOpenBookRPP1() + 1;
-                    config.setOpenBookRPP1(nextVal);
-                } else if ("RPP2".equalsIgnoreCase(lineType)) {
-                    nextVal = config.getOpenBookRPP2() + 1;
-                    config.setOpenBookRPP2(nextVal);
-                } else {
-                    nextVal = config.getOpenBookRPP3() + 1;
-                    config.setOpenBookRPP3(nextVal);
-                }
-                series = config.getOpenBookSeries();
-                fixedStrVal = config.getOpenBookFixedString();
+                prefix = config.getOpenBookPrefix();
+                fixStr = config.getOpenBookFixString();
+                major = config.getOpenBookMajorVersion();
+                minor = config.getOpenBookMinorVersion();
                 lastDeployed = config.getOpenBookLastDeployedPatch();
+                if ("RPP1".equalsIgnoreCase(lineType)) seriesStr = String.valueOf(config.getOpenBookRPP1());
+                else if ("RPP2".equalsIgnoreCase(lineType)) seriesStr = String.valueOf(config.getOpenBookRPP2());
+                else seriesStr = String.valueOf(config.getOpenBookRPP3());
             } else if ("Migration".equalsIgnoreCase(bookType) || "Max Migration".equalsIgnoreCase(bookType)) {
-                if ("RPP1".equalsIgnoreCase(lineType)) {
-                    nextVal = config.getMaxMigRPP1() + 1;
-                    config.setMaxMigRPP1(nextVal);
-                } else if ("RPP2".equalsIgnoreCase(lineType)) {
-                    nextVal = config.getMaxMigRPP2() + 1;
-                    config.setMaxMigRPP2(nextVal);
-                } else {
-                    nextVal = config.getMaxMigRPP3() + 1;
-                    config.setMaxMigRPP3(nextVal);
-                }
-                series = config.getMaxMigSeries();
-                fixedStrVal = config.getMaxMigFixedString();
+                prefix = config.getMaxMigPrefix();
+                fixStr = config.getMaxMigFixString();
+                major = config.getMaxMigMajorVersion();
+                minor = config.getMaxMigMinorVersion();
                 lastDeployed = config.getMaxMigLastDeployedPatch();
+                if ("RPP1".equalsIgnoreCase(lineType)) seriesStr = String.valueOf(config.getMaxMigRPP1());
+                else if ("RPP2".equalsIgnoreCase(lineType)) seriesStr = String.valueOf(config.getMaxMigRPP2());
+                else seriesStr = String.valueOf(config.getMaxMigRPP3());
             } else {
-                if ("RPP1".equalsIgnoreCase(lineType)) {
-                    nextVal = config.getClosedBookRPP1() + 1;
-                    config.setClosedBookRPP1(nextVal);
-                } else if ("RPP2".equalsIgnoreCase(lineType)) {
-                    nextVal = config.getClosedBookRPP2() + 1;
-                    config.setClosedBookRPP2(nextVal);
-                } else {
-                    nextVal = config.getClosedBookRPP3() + 1;
-                    config.setClosedBookRPP3(nextVal);
-                }
-                series = config.getClosedBookSeries();
-                fixedStrVal = config.getClosedBookFixedString();
+                prefix = config.getClosedBookPrefix();
+                fixStr = config.getClosedBookFixString();
+                major = config.getClosedBookMajorVersion();
+                minor = config.getClosedBookMinorVersion();
                 lastDeployed = config.getClosedBookLastDeployedPatch();
-            }
-
-            patchConfigRepository.updateConfig(config);
-
-            // Hardcoded Templates
-            String template = "";
-            if ("Datafix".equalsIgnoreCase(patchType)) {
-                template = "$LASTDEPLOYEDPATCH$_$CURRENTSEQUENCE$_$YYYMMDD$";
-            } else {
-                template = "$CAT_PREFIX$_$FIXED_STR$.$SERIES$_$CURRENTSEQUENCE$_$YYYMMDD$";
-            }
-
-            String catPrefixToken = "";
-            if ("Open Book".equalsIgnoreCase(bookType)) {
-                catPrefixToken = "RPP";
-            } else if ("Migration".equalsIgnoreCase(bookType) || "Max Migration".equalsIgnoreCase(bookType)) {
-                catPrefixToken = "Max";
-            } else {
-                catPrefixToken = "Mig";
+                if ("RPP1".equalsIgnoreCase(lineType)) seriesStr = String.valueOf(config.getClosedBookRPP1());
+                else if ("RPP2".equalsIgnoreCase(lineType)) seriesStr = String.valueOf(config.getClosedBookRPP2());
+                else seriesStr = String.valueOf(config.getClosedBookRPP3());
             }
 
             String dateStr = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-            String seqStr = String.format("%03d", nextVal);
+            String patchNumber = "";
 
-            // Smart Sequence: Prepend DF if it's a Datafix
-            String smartSeq = "Datafix".equalsIgnoreCase(patchType) ? "DF" + seqStr : seqStr;
-
-            // Intelligent truncation of last deployed patch date (if exists)
-            String cleanVersion = (lastDeployed != null && !lastDeployed.isEmpty()) ? lastDeployed : "NONE";
-            if (cleanVersion.matches(".*_\\d{8}$")) {
-                cleanVersion = cleanVersion.substring(0, cleanVersion.length() - 9);
-            }
-
-            // Better way: Use a Map for all tokens
-            Map<String, String> tokens = new HashMap<>();
-            tokens.put("$CAT_PREFIX$", catPrefixToken);
-            tokens.put("$CURRENTSEQUENCE$", smartSeq);
-            tokens.put("$YYYMMDD$", dateStr);
-            tokens.put("$LASTDEPLOYEDPATCH$", cleanVersion);
-            tokens.put("$SERIES$", (series != null ? series : "01.01.01"));
-            tokens.put("$FIXED_STR$", (fixedStrVal != null ? fixedStrVal : "PATCH"));
-
-            String patchNumber = template;
-            for (Map.Entry<String, String> entry : tokens.entrySet()) {
-                patchNumber = patchNumber.replace(entry.getKey(), entry.getValue());
+            if ("CodeFix".equalsIgnoreCase(patchType)) {
+                // Template: prefix_fixstring.majorversion.minorversion.series.currentnumber_yymmdd
+                String basePrefix = prefix + "_" + fixStr + "." + major + "." + minor + "." + seriesStr + ".";
+                String baseSuffix = "_" + dateStr;
+                
+                // Find next sequence for this EXACT combination today
+                int nextNum = findNextSequence(basePrefix, baseSuffix);
+                patchNumber = basePrefix + String.format("%03d", nextNum) + baseSuffix;
+            } else {
+                // Datafix: Version Chained
+                // Template: $LASTDEPLOYEDPATCH$_$CURRENTSEQUENCE$_$YYYMMDD$
+                String cleanVersion = (lastDeployed != null && !lastDeployed.isEmpty()) ? lastDeployed : "NONE";
+                if (cleanVersion.matches(".*_\\d{8}$")) {
+                    cleanVersion = cleanVersion.substring(0, cleanVersion.length() - 9);
+                }
+                
+                String basePrefix = cleanVersion + "_DF";
+                String baseSuffix = "_" + dateStr;
+                int nextNum = findNextSequence(basePrefix, baseSuffix);
+                patchNumber = basePrefix + String.format("%03d", nextNum) + baseSuffix;
             }
 
             task.setPatchNumber(patchNumber);
@@ -143,6 +107,24 @@ public class TaskService {
         } else {
             taskRepository.save(task);
         }
+    }
+
+    private int findNextSequence(String prefix, String suffix) {
+        List<Task> existing = taskRepository.findAll();
+        int max = 0;
+        for (Task t : existing) {
+            String pn = t.getPatchNumber();
+            if (pn != null && pn.startsWith(prefix) && pn.endsWith(suffix)) {
+                try {
+                    // Extract number between prefix and suffix
+                    String mid = pn.substring(prefix.length(), pn.length() - suffix.length());
+                    // Mid might contain "DF" for datafixes in some legacy formats, handled by startsWith match
+                    int current = Integer.parseInt(mid.replaceAll("[^0-9]", ""));
+                    if (current > max) max = current;
+                } catch (Exception e) { /* Ignore parsing errors */ }
+            }
+        }
+        return max + 1;
     }
 
     public void deleteTask(Long id) {

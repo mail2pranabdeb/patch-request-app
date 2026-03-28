@@ -68,7 +68,7 @@ public class TaskController {
     }
 
     @GetMapping("/tasks/edit/{id}")
-    public String editTaskForm(@PathVariable Long id, Model model) {
+    public String editTaskForm(@PathVariable("id") Long id, Model model) {
         Task task = taskService.getTaskById(id);
         if (task != null) {
             model.addAttribute("task", task);
@@ -78,7 +78,7 @@ public class TaskController {
     }
 
     @GetMapping("/tasks/delete/{id}")
-    public String deleteTask(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+    public String deleteTask(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
         taskService.deleteTask(id);
         redirectAttributes.addFlashAttribute("successMessage", "Successfully deleted the patch request.");
         return "redirect:/tasks";

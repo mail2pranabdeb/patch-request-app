@@ -17,15 +17,15 @@ public class UserRepository {
 
     private final RowMapper<User> rowMapper = (rs, rowNum) -> {
         User user = new User();
-        user.setId(rs.getLong("id"));
-        user.setUsername(rs.getString("username"));
-        user.setPassword(rs.getString("password"));
-        user.setRoles(rs.getString("roles"));
+        user.setId(rs.getLong("ID"));
+        user.setUsername(rs.getString("USERNAME"));
+        user.setPassword(rs.getString("PASSWORD"));
+        user.setRoles(rs.getString("ROLES"));
         return user;
     };
 
     public Optional<User> findByUsername(String username) {
-        String sql = "SELECT * FROM TOOL_APP_USER WHERE username = ?";
+        String sql = "SELECT * FROM TOOL_APP_USER WHERE UPPER(username) = UPPER(?)";
         return jdbcTemplate.query(sql, rowMapper, username).stream().findFirst();
     }
 }

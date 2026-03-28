@@ -43,10 +43,9 @@
                                             <input type="radio" th:field="*{patchType}" value="Datafix" required
                                                 style="width:14px; height:14px;"> Datafix
                                         </label>
-                                        <label class="radio-tile" title="For future use (Current: Datafix only)">
-                                            <input type="radio" th:field="*{patchType}" value="Code Fix"
-                                                style="width:14px; height:14px; opacity: 0.5;"> <span
-                                                style="color: var(--text-muted);">Code Fix</span>
+                                        <label class="radio-tile">
+                                            <input type="radio" th:field="*{patchType}" value="CodeFix" required
+                                                style="width:14px; height:14px;"> CodeFix
                                         </label>
                                     </div>
                                 </div>
@@ -111,7 +110,7 @@
                                     <label class="form-label">Short Description <span
                                             style="color:var(--danger);">*</span></label>
                                     <textarea class="form-control" th:field="*{taskShortDescription}" required
-                                        placeholder="Brief description of the patch objective" rows="8"
+                                        placeholder="Brief description of the patch objective" rows="6"
                                         style="resize: vertical;"></textarea>
                                 </div>
                             </div>

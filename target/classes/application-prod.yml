@@ -1,4 +1,7 @@
 spring:
+  sql:
+    init:
+      mode: never
   datasource:
     url: jdbc:oracle:thin:@//localhost:1521/ORCL
     driver-class-name: oracle.jdbc.OracleDriver
