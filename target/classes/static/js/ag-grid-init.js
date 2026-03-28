@@ -71,9 +71,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (exportBtn) {
         exportBtn.addEventListener('click', () => {
             if (gridApi) {
-                gridApi.exportDataAsCsv({ fileName: 'patch_list.csv', columnKeys: ['patchNumber', 'patchType', 'bookType', 'taskNumber', 'requestedBy', 'taskShortDescription'] });
+                gridApi.exportDataAsCsv({ 
+                    fileName: 'patch_list.csv', 
+                    columnKeys: ['patchNumber', 'patchType', 'bookType', 'taskNumber', 'requestedBy', 'taskShortDescription'],
+                    suppressQuotes: true 
+                });
             } else if (gridOptions.api) {
-                gridOptions.api.exportDataAsCsv({ fileName: 'patch_list.csv', columnKeys: ['patchNumber', 'patchType', 'bookType', 'taskNumber', 'requestedBy', 'taskShortDescription'] });
+                gridOptions.api.exportDataAsCsv({ 
+                    fileName: 'patch_list.csv', 
+                    columnKeys: ['patchNumber', 'patchType', 'bookType', 'taskNumber', 'requestedBy', 'taskShortDescription'],
+                    suppressQuotes: true
+                });
             }
         });
     }
