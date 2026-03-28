@@ -22,7 +22,7 @@
                     </div>
                     <div class="page-title-text">
                         <h2>System Configuration</h2>
-                        <p>Configure internal Datafix and Codefix patch format and backend identifiers.</p>
+                        <p>Configure internal Series, Fixed Strings, and Backend Identifiers.</p>
                     </div>
                 </div>
             </div>
@@ -46,17 +46,17 @@
                                         Open Book Series</h4>
                                     <div class="form-group" style="margin-bottom: 8px;">
                                         <label class="form-label"
-                                            style="font-size: 0.7rem; color: var(--text-muted);">Codefix Patch Format
+                                            style="font-size: 0.7rem; color: var(--text-muted);">Series (e.g. 01.02)
                                             <span style="color:var(--danger)">*</span></label>
                                         <input type="text" class="form-control form-control-sm"
-                                            th:field="*{openBookCodefixPatchFormat}" required>
+                                            th:field="*{openBookSeries}" required>
                                     </div>
                                     <div class="form-group" style="margin-bottom: 8px;">
                                         <label class="form-label"
-                                            style="font-size: 0.7rem; color: var(--text-muted);">Datafix Patch Format
+                                            style="font-size: 0.7rem; color: var(--text-muted);">Fixed String (e.g. PATCH)
                                             <span style="color:var(--danger)">*</span></label>
                                         <input type="text" class="form-control form-control-sm"
-                                            th:field="*{openBookDatafixPatchFormat}" required>
+                                            th:field="*{openBookFixedString}" required>
                                     </div>
                                     <div class="form-group" style="margin-bottom: 8px;">
                                         <label class="form-label" style="font-size: 0.7rem;">RPP1 Current <span
@@ -75,7 +75,7 @@
                                     </div>
                                     <div class="form-group" style="margin-bottom: 8px;">
                                         <label class="form-label" style="color: var(--primary); font-size: 0.7rem;">Last
-                                            Deployed (Prod) <span style="color:var(--danger)">*</span></label>
+                                            Deployed <span style="color:var(--danger)">*</span></label>
                                         <input type="text" class="form-control" th:field="*{openBookLastDeployedPatch}"
                                             required>
                                     </div>
@@ -88,17 +88,17 @@
                                         Closed Book Series</h4>
                                     <div class="form-group" style="margin-bottom: 8px;">
                                         <label class="form-label"
-                                            style="font-size: 0.7rem; color: var(--text-muted);">Codefix Patch Format
+                                            style="font-size: 0.7rem; color: var(--text-muted);">Series (e.g. 01.02)
                                             <span style="color:var(--danger)">*</span></label>
                                         <input type="text" class="form-control form-control-sm"
-                                            th:field="*{closedBookCodefixPatchFormat}" required>
+                                            th:field="*{closedBookSeries}" required>
                                     </div>
                                     <div class="form-group" style="margin-bottom: 8px;">
                                         <label class="form-label"
-                                            style="font-size: 0.7rem; color: var(--text-muted);">Datafix Patch Format
+                                            style="font-size: 0.7rem; color: var(--text-muted);">Fixed String (e.g. PATCH)
                                             <span style="color:var(--danger)">*</span></label>
                                         <input type="text" class="form-control form-control-sm"
-                                            th:field="*{closedBookDatafixPatchFormat}" required>
+                                            th:field="*{closedBookFixedString}" required>
                                     </div>
                                     <div class="form-group" style="margin-bottom: 8px;">
                                         <label class="form-label" style="font-size: 0.7rem;">RPP1 Current <span
@@ -117,7 +117,7 @@
                                     </div>
                                     <div class="form-group" style="margin-bottom: 8px;">
                                         <label class="form-label" style="color: var(--danger); font-size: 0.7rem;">Last
-                                            Deployed (Prod) <span style="color:var(--danger)">*</span></label>
+                                            Deployed <span style="color:var(--danger)">*</span></label>
                                         <input type="text" class="form-control"
                                             th:field="*{closedBookLastDeployedPatch}" required>
                                     </div>
@@ -130,17 +130,17 @@
                                         Max Migration Series</h4>
                                     <div class="form-group" style="margin-bottom: 8px;">
                                         <label class="form-label"
-                                            style="font-size: 0.7rem; color: var(--text-muted);">Codefix Patch Format
+                                            style="font-size: 0.7rem; color: var(--text-muted);">Series (e.g. 01.02)
                                             <span style="color:var(--danger)">*</span></label>
                                         <input type="text" class="form-control form-control-sm"
-                                            th:field="*{maxMigCodefixPatchFormat}" required>
+                                            th:field="*{maxMigSeries}" required>
                                     </div>
                                     <div class="form-group" style="margin-bottom: 8px;">
                                         <label class="form-label"
-                                            style="font-size: 0.7rem; color: var(--text-muted);">Datafix Patch Format
+                                            style="font-size: 0.7rem; color: var(--text-muted);">Fixed String (e.g. PATCH)
                                             <span style="color:var(--danger)">*</span></label>
                                         <input type="text" class="form-control form-control-sm"
-                                            th:field="*{maxMigDatafixPatchFormat}" required>
+                                            th:field="*{maxMigFixedString}" required>
                                     </div>
                                     <div class="form-group" style="margin-bottom: 8px;">
                                         <label class="form-label" style="font-size: 0.7rem;">RPP1 Current <span
@@ -159,7 +159,7 @@
                                     </div>
                                     <div class="form-group" style="margin-bottom: 8px;">
                                         <label class="form-label" style="color: var(--warning); font-size: 0.7rem;">Last
-                                            Deployed (Prod) <span style="color:var(--danger)">*</span></label>
+                                            Deployed <span style="color:var(--danger)">*</span></label>
                                         <input type="text" class="form-control" th:field="*{maxMigLastDeployedPatch}"
                                             required>
                                     </div>
