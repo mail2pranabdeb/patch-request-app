@@ -60,7 +60,7 @@ public class TaskService {
                          config.getOpenBookDatafixPatchFormat() : 
                          config.getOpenBookCodefixPatchFormat();
                 lastDeployed = config.getOpenBookLastDeployedPatch();
-            } else if ("Migration".equalsIgnoreCase(bookType)) {
+            } else if ("Migration".equalsIgnoreCase(bookType) || "Max Migration".equalsIgnoreCase(bookType)) {
                 if ("RPP1".equalsIgnoreCase(lineType)) {
                     nextVal = config.getMaxMigRPP1() + 1;
                     config.setMaxMigRPP1(nextVal);
