@@ -101,10 +101,16 @@ public class TaskService {
             String dateStr = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
             String seqStr = String.format("%03d", nextVal);
             
+            // Intelligent truncation of last deployed patch date (if exists)
+            String cleanVersion = (lastDeployed != null ? lastDeployed : "NONE");
+            if (cleanVersion.matches(".*_\\d{8}$")) {
+                cleanVersion = cleanVersion.substring(0, cleanVersion.length() - 9);
+            }
+            
             String patchNumber = format;
             patchNumber = patchNumber.replace("$3DIGITSEQUENCE$", seqStr);
             patchNumber = patchNumber.replace("$YYYMMDD$", dateStr);
-            patchNumber = patchNumber.replace("$LASTDEPLOYEDPATCH$", (lastDeployed != null ? lastDeployed : "NONE"));
+            patchNumber = patchNumber.replace("$LASTDEPLOYEDPATCH$", cleanVersion);
             
             // Fallback if no tokens were replaced (old style)
             if (patchNumber.equals(format)) {
