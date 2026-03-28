@@ -13,23 +13,23 @@ CREATE TABLE TOOL_PATCH_CONFIG (
     open_book_rpp1 NUMBER NOT NULL,
     open_book_rpp2 NUMBER NOT NULL,
     open_book_rpp3 NUMBER NOT NULL,
-    open_book_codefix_patch_format VARCHAR2(255) NOT NULL,
-    open_book_datafix_patch_format VARCHAR2(255) NOT NULL,
-    open_book_last_deployed_patch VARCHAR2(255) NOT NULL,
+    open_book_codefix_patch_format VARCHAR2(255),
+    open_book_datafix_patch_format VARCHAR2(255),
+    open_book_last_deployed_patch VARCHAR2(255),
     
     closed_book_rpp1 NUMBER NOT NULL,
     closed_book_rpp2 NUMBER NOT NULL,
     closed_book_rpp3 NUMBER NOT NULL,
-    closed_book_codefix_patch_format VARCHAR2(255) NOT NULL,
-    closed_book_datafix_patch_format VARCHAR2(255) NOT NULL,
-    closed_book_last_deployed_patch VARCHAR2(255) NOT NULL,
+    closed_book_codefix_patch_format VARCHAR2(255),
+    closed_book_datafix_patch_format VARCHAR2(255),
+    closed_book_last_deployed_patch VARCHAR2(255),
     
     max_mig_rpp1 NUMBER NOT NULL,
     max_mig_rpp2 NUMBER NOT NULL,
     max_mig_rpp3 NUMBER NOT NULL,
-    max_mig_codefix_patch_format VARCHAR2(255) NOT NULL,
-    max_mig_datafix_patch_format VARCHAR2(255) NOT NULL,
-    max_mig_last_deployed_patch VARCHAR2(255) NOT NULL
+    max_mig_codefix_patch_format VARCHAR2(255),
+    max_mig_datafix_patch_format VARCHAR2(255),
+    max_mig_last_deployed_patch VARCHAR2(255)
 );
 
 CREATE TABLE IF NOT EXISTS TOOL_APP_TASK (
