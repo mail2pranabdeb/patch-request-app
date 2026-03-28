@@ -17,7 +17,11 @@ CREATE TABLE TOOL_PATCH_CONFIG (
     closed_book_rpp1 NUMBER DEFAULT 0,
     closed_book_rpp2 NUMBER DEFAULT 0,
     closed_book_rpp3 NUMBER DEFAULT 0,
-    closed_book_last_deployed_patch VARCHAR2(255)
+    closed_book_last_deployed_patch VARCHAR2(255),
+    max_mig_rpp1 NUMBER DEFAULT 0,
+    max_mig_rpp2 NUMBER DEFAULT 0,
+    max_mig_rpp3 NUMBER DEFAULT 0,
+    max_mig_last_deployed_patch VARCHAR2(255)
 );
 
 CREATE TABLE IF NOT EXISTS TOOL_APP_TASK (

@@ -14,16 +14,26 @@ public class PatchConfig {
     private Long closedBookRPP2;
     private Long closedBookRPP3;
     private String closedBookLastDeployedPatch;
+    
+    // Max Mig Series (as defined in schema.sql)
+    private Long maxMigRPP1;
+    private Long maxMigRPP2;
+    private Long maxMigRPP3;
+    private String maxMigLastDeployedPatch;
 
     public PatchConfig() {
         this.openBookRPP1 = 0L;
         this.openBookRPP2 = 0L;
         this.openBookRPP3 = 0L;
+        this.openBookLastDeployedPatch = "";
         this.closedBookRPP1 = 0L;
         this.closedBookRPP2 = 0L;
         this.closedBookRPP3 = 0L;
-        this.openBookLastDeployedPatch = "";
         this.closedBookLastDeployedPatch = "";
+        this.maxMigRPP1 = 0L;
+        this.maxMigRPP2 = 0L;
+        this.maxMigRPP3 = 0L;
+        this.maxMigLastDeployedPatch = "";
     }
 
     public Long getId() {
@@ -58,6 +68,14 @@ public class PatchConfig {
         this.openBookRPP3 = openBookRPP3;
     }
 
+    public String getOpenBookLastDeployedPatch() {
+        return openBookLastDeployedPatch;
+    }
+
+    public void setOpenBookLastDeployedPatch(String openBookLastDeployedPatch) {
+        this.openBookLastDeployedPatch = openBookLastDeployedPatch;
+    }
+
     public Long getClosedBookRPP1() {
         return closedBookRPP1;
     }
@@ -82,14 +100,6 @@ public class PatchConfig {
         this.closedBookRPP3 = closedBookRPP3;
     }
 
-    public String getOpenBookLastDeployedPatch() {
-        return openBookLastDeployedPatch;
-    }
-
-    public void setOpenBookLastDeployedPatch(String openBookLastDeployedPatch) {
-        this.openBookLastDeployedPatch = openBookLastDeployedPatch;
-    }
-
     public String getClosedBookLastDeployedPatch() {
         return closedBookLastDeployedPatch;
     }
@@ -98,18 +108,35 @@ public class PatchConfig {
         this.closedBookLastDeployedPatch = closedBookLastDeployedPatch;
     }
 
-    @Override
-    public String toString() {
-        return "PatchConfig{" +
-               "id=" + id +
-               ", openBookRPP1=" + openBookRPP1 +
-               ", openBookRPP2=" + openBookRPP2 +
-               ", openBookRPP3=" + openBookRPP3 +
-               ", closedBookRPP1=" + closedBookRPP1 +
-               ", closedBookRPP2=" + closedBookRPP2 +
-               ", closedBookRPP3=" + closedBookRPP3 +
-               ", openBookLastDeployedPatch='" + openBookLastDeployedPatch + '\'' +
-               ", closedBookLastDeployedPatch='" + closedBookLastDeployedPatch + '\'' +
-               '}';
+    public Long getMaxMigRPP1() {
+        return maxMigRPP1;
+    }
+
+    public void setMaxMigRPP1(Long maxMigRPP1) {
+        this.maxMigRPP1 = maxMigRPP1;
+    }
+
+    public Long getMaxMigRPP2() {
+        return maxMigRPP2;
+    }
+
+    public void setMaxMigRPP2(Long maxMigRPP2) {
+        this.maxMigRPP2 = maxMigRPP2;
+    }
+
+    public Long getMaxMigRPP3() {
+        return maxMigRPP3;
+    }
+
+    public void setMaxMigRPP3(Long maxMigRPP3) {
+        this.maxMigRPP3 = maxMigRPP3;
+    }
+
+    public String getMaxMigLastDeployedPatch() {
+        return maxMigLastDeployedPatch;
+    }
+
+    public void setMaxMigLastDeployedPatch(String maxMigLastDeployedPatch) {
+        this.maxMigLastDeployedPatch = maxMigLastDeployedPatch;
     }
 }
