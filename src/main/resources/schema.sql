@@ -7,14 +7,17 @@ CREATE TABLE IF NOT EXISTS TOOL_APP_USER (
     roles VARCHAR2(255) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS TOOL_PATCH_CONFIG (
+DROP TABLE IF EXISTS TOOL_PATCH_CONFIG;
+CREATE TABLE TOOL_PATCH_CONFIG (
     id NUMBER PRIMARY KEY,
-    open_book_rpp1 NUMBER,
-    open_book_rpp2 NUMBER,
-    open_book_rpp3 NUMBER,
-    closed_book_rpp1 NUMBER,
-    closed_book_rpp2 NUMBER,
-    closed_book_rpp3 NUMBER
+    open_book_rpp1 NUMBER DEFAULT 0,
+    open_book_rpp2 NUMBER DEFAULT 0,
+    open_book_rpp3 NUMBER DEFAULT 0,
+    open_book_last_deployed_patch VARCHAR2(255),
+    closed_book_rpp1 NUMBER DEFAULT 0,
+    closed_book_rpp2 NUMBER DEFAULT 0,
+    closed_book_rpp3 NUMBER DEFAULT 0,
+    closed_book_last_deployed_patch VARCHAR2(255)
 );
 
 CREATE TABLE IF NOT EXISTS TOOL_APP_TASK (

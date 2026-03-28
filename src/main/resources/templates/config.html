@@ -54,6 +54,11 @@
                                         <label class="form-label">RPP3 Current Sequence</label>
                                         <input type="number" class="form-control" th:field="*{openBookRPP3}" required>
                                     </div>
+                                    <div class="form-group">
+                                        <label class="form-label" style="color: var(--primary);">Last Deployed Patch (Prod)</label>
+                                        <input type="text" class="form-control" th:field="*{openBookLastDeployedPatch}"
+                                            placeholder="e.g., OB-RPP1-0099">
+                                    </div>
                                 </div>
 
                                 <!-- Closed Book Section -->
@@ -70,6 +75,11 @@
                                     <div class="form-group" style="margin-bottom: 12px;">
                                         <label class="form-label">RPP3 Current Sequence</label>
                                         <input type="number" class="form-control" th:field="*{closedBookRPP3}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" style="color: var(--danger);">Last Deployed Patch (Prod)</label>
+                                        <input type="text" class="form-control" th:field="*{closedBookLastDeployedPatch}"
+                                            placeholder="e.g., CB-RPP1-0099">
                                     </div>
                                 </div>
                             </div>

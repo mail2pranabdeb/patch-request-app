@@ -7,11 +7,13 @@ public class PatchConfig {
     private Long openBookRPP1;
     private Long openBookRPP2;
     private Long openBookRPP3;
-    
+    private String openBookLastDeployedPatch;
+
     // Closed Book Series
     private Long closedBookRPP1;
     private Long closedBookRPP2;
     private Long closedBookRPP3;
+    private String closedBookLastDeployedPatch;
 
     public PatchConfig() {
         this.openBookRPP1 = 0L;
@@ -20,6 +22,8 @@ public class PatchConfig {
         this.closedBookRPP1 = 0L;
         this.closedBookRPP2 = 0L;
         this.closedBookRPP3 = 0L;
+        this.openBookLastDeployedPatch = "";
+        this.closedBookLastDeployedPatch = "";
     }
 
     public Long getId() {
@@ -78,6 +82,22 @@ public class PatchConfig {
         this.closedBookRPP3 = closedBookRPP3;
     }
 
+    public String getOpenBookLastDeployedPatch() {
+        return openBookLastDeployedPatch;
+    }
+
+    public void setOpenBookLastDeployedPatch(String openBookLastDeployedPatch) {
+        this.openBookLastDeployedPatch = openBookLastDeployedPatch;
+    }
+
+    public String getClosedBookLastDeployedPatch() {
+        return closedBookLastDeployedPatch;
+    }
+
+    public void setClosedBookLastDeployedPatch(String closedBookLastDeployedPatch) {
+        this.closedBookLastDeployedPatch = closedBookLastDeployedPatch;
+    }
+
     @Override
     public String toString() {
         return "PatchConfig{" +
@@ -88,6 +108,8 @@ public class PatchConfig {
                ", closedBookRPP1=" + closedBookRPP1 +
                ", closedBookRPP2=" + closedBookRPP2 +
                ", closedBookRPP3=" + closedBookRPP3 +
+               ", openBookLastDeployedPatch='" + openBookLastDeployedPatch + '\'' +
+               ", closedBookLastDeployedPatch='" + closedBookLastDeployedPatch + '\'' +
                '}';
     }
 }
