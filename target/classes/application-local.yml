@@ -1,12 +1,13 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:testdb;MODE=Oracle;DB_CLOSE_DELAY=-1
+    url: jdbc:h2:file:./data/patchdb;MODE=Oracle;DB_CLOSE_DELAY=-1;AUTO_SERVER=TRUE
     driver-class-name: org.h2.Driver
     username: sa
     password: password
   sql:
     init:
-      mode: always
+      # Only run if the database is newly created (embedded mode)
+      mode: embedded
       schema-locations: classpath:schema.sql
       data-locations: classpath:data.sql
   h2:
