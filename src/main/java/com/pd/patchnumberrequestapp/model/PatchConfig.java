@@ -7,40 +7,46 @@ public class PatchConfig {
     private Long openBookRPP1;
     private Long openBookRPP2;
     private Long openBookRPP3;
-    private String openBookPatchFormat;
+    private String openBookCodefixPatchFormat;
+    private String openBookDatafixPatchFormat;
     private String openBookLastDeployedPatch;
 
     // Closed Book
     private Long closedBookRPP1;
     private Long closedBookRPP2;
     private Long closedBookRPP3;
-    private String closedBookPatchFormat;
+    private String closedBookCodefixPatchFormat;
+    private String closedBookDatafixPatchFormat;
     private String closedBookLastDeployedPatch;
     
-    // Max Migration
+    // Migration
     private Long maxMigRPP1;
     private Long maxMigRPP2;
     private Long maxMigRPP3;
-    private String maxMigPatchFormat;
+    private String maxMigCodefixPatchFormat;
+    private String maxMigDatafixPatchFormat;
     private String maxMigLastDeployedPatch;
 
     public PatchConfig() {
         this.openBookRPP1 = 0L;
         this.openBookRPP2 = 0L;
         this.openBookRPP3 = 0L;
-        this.openBookPatchFormat = "OBJ-%04d";
+        this.openBookCodefixPatchFormat = "";
+        this.openBookDatafixPatchFormat = "";
         this.openBookLastDeployedPatch = "";
         
         this.closedBookRPP1 = 0L;
         this.closedBookRPP2 = 0L;
         this.closedBookRPP3 = 0L;
-        this.closedBookPatchFormat = "CBJ-%04d";
+        this.closedBookCodefixPatchFormat = "";
+        this.closedBookDatafixPatchFormat = "";
         this.closedBookLastDeployedPatch = "";
         
         this.maxMigRPP1 = 0L;
         this.maxMigRPP2 = 0L;
         this.maxMigRPP3 = 0L;
-        this.maxMigPatchFormat = "MIG-%04d";
+        this.maxMigCodefixPatchFormat = "";
+        this.maxMigDatafixPatchFormat = "";
         this.maxMigLastDeployedPatch = "";
     }
 
@@ -76,12 +82,20 @@ public class PatchConfig {
         this.openBookRPP3 = openBookRPP3;
     }
 
-    public String getOpenBookPatchFormat() {
-        return openBookPatchFormat;
+    public String getOpenBookCodefixPatchFormat() {
+        return openBookCodefixPatchFormat;
     }
 
-    public void setOpenBookPatchFormat(String openBookPatchFormat) {
-        this.openBookPatchFormat = openBookPatchFormat;
+    public void setOpenBookCodefixPatchFormat(String openBookCodefixPatchFormat) {
+        this.openBookCodefixPatchFormat = openBookCodefixPatchFormat;
+    }
+
+    public String getOpenBookDatafixPatchFormat() {
+        return openBookDatafixPatchFormat;
+    }
+
+    public void setOpenBookDatafixPatchFormat(String openBookDatafixPatchFormat) {
+        this.openBookDatafixPatchFormat = openBookDatafixPatchFormat;
     }
 
     public String getOpenBookLastDeployedPatch() {
@@ -116,12 +130,20 @@ public class PatchConfig {
         this.closedBookRPP3 = closedBookRPP3;
     }
 
-    public String getClosedBookPatchFormat() {
-        return closedBookPatchFormat;
+    public String getClosedBookCodefixPatchFormat() {
+        return closedBookCodefixPatchFormat;
     }
 
-    public void setClosedBookPatchFormat(String closedBookPatchFormat) {
-        this.closedBookPatchFormat = closedBookPatchFormat;
+    public void setClosedBookCodefixPatchFormat(String closedBookCodefixPatchFormat) {
+        this.closedBookCodefixPatchFormat = closedBookCodefixPatchFormat;
+    }
+
+    public String getClosedBookDatafixPatchFormat() {
+        return closedBookDatafixPatchFormat;
+    }
+
+    public void setClosedBookDatafixPatchFormat(String closedBookDatafixPatchFormat) {
+        this.closedBookDatafixPatchFormat = closedBookDatafixPatchFormat;
     }
 
     public String getClosedBookLastDeployedPatch() {
@@ -156,12 +178,20 @@ public class PatchConfig {
         this.maxMigRPP3 = maxMigRPP3;
     }
 
-    public String getMaxMigPatchFormat() {
-        return maxMigPatchFormat;
+    public String getMaxMigCodefixPatchFormat() {
+        return maxMigCodefixPatchFormat;
     }
 
-    public void setMaxMigPatchFormat(String maxMigPatchFormat) {
-        this.maxMigPatchFormat = maxMigPatchFormat;
+    public void setMaxMigCodefixPatchFormat(String maxMigCodefixPatchFormat) {
+        this.maxMigCodefixPatchFormat = maxMigCodefixPatchFormat;
+    }
+
+    public String getMaxMigDatafixPatchFormat() {
+        return maxMigDatafixPatchFormat;
+    }
+
+    public void setMaxMigDatafixPatchFormat(String maxMigDatafixPatchFormat) {
+        this.maxMigDatafixPatchFormat = maxMigDatafixPatchFormat;
     }
 
     public String getMaxMigLastDeployedPatch() {

@@ -7,6 +7,8 @@ import com.pd.patchnumberrequestapp.repository.TaskRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -39,8 +41,12 @@ public class TaskService {
             
             Long nextVal = 0L;
             
-            String format = "";
+            String catPrefix = "";
+            String fixedStr = "";
+            String patchType = task.getPatchType() != null ? task.getPatchType() : "Code Fix";
+            
             if ("Open Book".equalsIgnoreCase(bookType)) {
+                catPrefix = "RPP";
                 if ("RPP1".equalsIgnoreCase(lineType)) {
                     nextVal = config.getOpenBookRPP1() + 1;
                     config.setOpenBookRPP1(nextVal);
@@ -51,8 +57,11 @@ public class TaskService {
                     nextVal = config.getOpenBookRPP3() + 1;
                     config.setOpenBookRPP3(nextVal);
                 }
-                format = config.getOpenBookPatchFormat();
+                fixedStr = "Datafix".equalsIgnoreCase(patchType) ? 
+                           config.getOpenBookDatafixPatchFormat() : 
+                           config.getOpenBookCodefixPatchFormat();
             } else if ("Migration".equalsIgnoreCase(bookType)) {
+                catPrefix = "Max";
                 if ("RPP1".equalsIgnoreCase(lineType)) {
                     nextVal = config.getMaxMigRPP1() + 1;
                     config.setMaxMigRPP1(nextVal);
@@ -63,8 +72,11 @@ public class TaskService {
                     nextVal = config.getMaxMigRPP3() + 1;
                     config.setMaxMigRPP3(nextVal);
                 }
-                format = config.getMaxMigPatchFormat();
+                fixedStr = "Datafix".equalsIgnoreCase(patchType) ? 
+                           config.getMaxMigDatafixPatchFormat() : 
+                           config.getMaxMigCodefixPatchFormat();
             } else {
+                catPrefix = "Mig";
                 if ("RPP1".equalsIgnoreCase(lineType)) {
                     nextVal = config.getClosedBookRPP1() + 1;
                     config.setClosedBookRPP1(nextVal);
@@ -75,16 +87,21 @@ public class TaskService {
                     nextVal = config.getClosedBookRPP3() + 1;
                     config.setClosedBookRPP3(nextVal);
                 }
-                format = config.getClosedBookPatchFormat();
+                fixedStr = "Datafix".equalsIgnoreCase(patchType) ? 
+                           config.getClosedBookDatafixPatchFormat() : 
+                           config.getClosedBookCodefixPatchFormat();
             }
             
             patchConfigRepository.updateConfig(config);
             
-            // Use the user-defined format string (e.g. OBJ-%04d)
-            if (format == null || !format.contains("%")) {
-                format = "PATCH-%d"; // Fallback
-            }
-            task.setPatchNumber(String.format(format, nextVal));
+            // Format: [PREFIX]_[FIXEDSTRING]_[3DIGITSEQUENCE]_[yyyymmdd]
+            String dateStr = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+            String patchNumber = String.format("%s_%s_%03d_%s", 
+                                              catPrefix, 
+                                              (fixedStr != null ? fixedStr : ""), 
+                                              nextVal, 
+                                              dateStr);
+            task.setPatchNumber(patchNumber);
             
             taskRepository.save(task); 
         } else {

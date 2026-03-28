@@ -3,7 +3,7 @@ MERGE INTO TOOL_APP_USER KEY(username) VALUES (1, 'admin', '{noop}admin', 'ROLE_
 
 -- Insert initial config
 MERGE INTO TOOL_PATCH_CONFIG KEY(id) VALUES (1, 
-    0, 0, 0, 'OBJ-%04d', '', 
-    0, 0, 0, 'CBJ-%04d', '', 
-    0, 0, 0, 'MIG-%04d', ''
+    0, 0, 0, '', '', '', 
+    0, 0, 0, '', '', '', 
+    0, 0, 0, '', '', ''
 );

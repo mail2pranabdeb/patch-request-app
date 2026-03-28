@@ -64,6 +64,10 @@
                                             <input type="radio" th:field="*{bookType}" value="Closed Book" required
                                                 style="width:14px; height:14px;"> Closed Book
                                         </label>
+                                        <label class="radio-tile">
+                                            <input type="radio" th:field="*{bookType}" value="Migration" required
+                                                style="width:14px; height:14px;"> Migration
+                                        </label>
                                     </div>
                                 </div>
 
@@ -75,15 +79,13 @@
                                             <input type="radio" th:field="*{lineType}" value="RPP1" required
                                                 style="width:14px; height:14px;"> RPP1
                                         </label>
-                                        <label class="radio-tile" title="For future use (Current: RPP1 only)">
-                                            <input type="radio" th:field="*{lineType}" value="RPP2" disabled
-                                                style="width:14px; height:14px; opacity: 0.5;"> <span
-                                                style="color: var(--text-muted);">RPP2</span>
+                                        <label class="radio-tile">
+                                            <input type="radio" th:field="*{lineType}" value="RPP2" required
+                                                style="width:14px; height:14px;"> RPP2
                                         </label>
-                                        <label class="radio-tile" title="For future use (Current: RPP1 only)">
-                                            <input type="radio" th:field="*{lineType}" value="RPP3" disabled
-                                                style="width:14px; height:14px; opacity: 0.5;"> <span
-                                                style="color: var(--text-muted);">RPP3</span>
+                                        <label class="radio-tile">
+                                            <input type="radio" th:field="*{lineType}" value="RPP3" required
+                                                style="width:14px; height:14px;"> RPP3
                                         </label>
                                     </div>
                                 </div>
