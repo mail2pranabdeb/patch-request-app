@@ -6,10 +6,21 @@
     <context-root>/patch-request-app</context-root>
     
     <container-descriptor>
-        <!-- In WebLogic deployment of Spring Boot, we should prefer web-inf classes to avoid library conflicts -->
         <prefer-web-inf-classes>true</prefer-web-inf-classes>
         
-        <!-- Setting jsp-config for Spring Boot compatibility if needed -->
+        <!-- Force WebLogic to use application versions of common libraries in shared domains -->
+        <prefer-application-packages>
+            <package-name>org.slf4j.*</package-name>
+            <package-name>ch.qos.logback.*</package-name>
+            <package-name>com.fasterxml.jackson.*</package-name>
+            <package-name>org.hibernate.*</package-name>
+            <package-name>com.zaxxer.hikari.*</package-name>
+            <package-name>org.springframework.*</package-name>
+            <package-name>jakarta.persistence.*</package-name>
+            <package-name>jakarta.validation.*</package-name>
+            <package-name>org.yaml.snakeyaml.*</package-name>
+        </prefer-application-packages>
+
         <show-archived-real-path-enabled>true</show-archived-real-path-enabled>
     </container-descriptor>
 </weblogic-web-app>
