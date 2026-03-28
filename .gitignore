@@ -1,0 +1,16 @@
+target/
+.idea/
+.project
+.classpath
+.settings/
+.project
+bin/
+*.iml
+*.log
+*.zip
+*.war
+*.jar
+data/
+data/*
+node_modules/
+.DS_Store

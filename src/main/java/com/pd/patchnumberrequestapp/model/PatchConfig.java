@@ -3,36 +3,44 @@ package com.pd.patchnumberrequestapp.model;
 public class PatchConfig {
     private Long id;
     
-    // Open Book Series
+    // Open Book
     private Long openBookRPP1;
     private Long openBookRPP2;
     private Long openBookRPP3;
+    private String openBookPatchFormat;
     private String openBookLastDeployedPatch;
 
-    // Closed Book Series
+    // Closed Book
     private Long closedBookRPP1;
     private Long closedBookRPP2;
     private Long closedBookRPP3;
+    private String closedBookPatchFormat;
     private String closedBookLastDeployedPatch;
     
-    // Max Mig Series (as defined in schema.sql)
+    // Max Migration
     private Long maxMigRPP1;
     private Long maxMigRPP2;
     private Long maxMigRPP3;
+    private String maxMigPatchFormat;
     private String maxMigLastDeployedPatch;
 
     public PatchConfig() {
         this.openBookRPP1 = 0L;
         this.openBookRPP2 = 0L;
         this.openBookRPP3 = 0L;
+        this.openBookPatchFormat = "OBJ-%04d";
         this.openBookLastDeployedPatch = "";
+        
         this.closedBookRPP1 = 0L;
         this.closedBookRPP2 = 0L;
         this.closedBookRPP3 = 0L;
+        this.closedBookPatchFormat = "CBJ-%04d";
         this.closedBookLastDeployedPatch = "";
+        
         this.maxMigRPP1 = 0L;
         this.maxMigRPP2 = 0L;
         this.maxMigRPP3 = 0L;
+        this.maxMigPatchFormat = "MIG-%04d";
         this.maxMigLastDeployedPatch = "";
     }
 
@@ -68,6 +76,14 @@ public class PatchConfig {
         this.openBookRPP3 = openBookRPP3;
     }
 
+    public String getOpenBookPatchFormat() {
+        return openBookPatchFormat;
+    }
+
+    public void setOpenBookPatchFormat(String openBookPatchFormat) {
+        this.openBookPatchFormat = openBookPatchFormat;
+    }
+
     public String getOpenBookLastDeployedPatch() {
         return openBookLastDeployedPatch;
     }
@@ -100,6 +116,14 @@ public class PatchConfig {
         this.closedBookRPP3 = closedBookRPP3;
     }
 
+    public String getClosedBookPatchFormat() {
+        return closedBookPatchFormat;
+    }
+
+    public void setClosedBookPatchFormat(String closedBookPatchFormat) {
+        this.closedBookPatchFormat = closedBookPatchFormat;
+    }
+
     public String getClosedBookLastDeployedPatch() {
         return closedBookLastDeployedPatch;
     }
@@ -130,6 +154,14 @@ public class PatchConfig {
 
     public void setMaxMigRPP3(Long maxMigRPP3) {
         this.maxMigRPP3 = maxMigRPP3;
+    }
+
+    public String getMaxMigPatchFormat() {
+        return maxMigPatchFormat;
+    }
+
+    public void setMaxMigPatchFormat(String maxMigPatchFormat) {
+        this.maxMigPatchFormat = maxMigPatchFormat;
     }
 
     public String getMaxMigLastDeployedPatch() {

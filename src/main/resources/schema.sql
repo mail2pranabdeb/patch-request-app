@@ -13,14 +13,19 @@ CREATE TABLE TOOL_PATCH_CONFIG (
     open_book_rpp1 NUMBER DEFAULT 0,
     open_book_rpp2 NUMBER DEFAULT 0,
     open_book_rpp3 NUMBER DEFAULT 0,
+    open_book_patch_format VARCHAR2(100) DEFAULT 'OBJ-%04d',
     open_book_last_deployed_patch VARCHAR2(255),
+    
     closed_book_rpp1 NUMBER DEFAULT 0,
     closed_book_rpp2 NUMBER DEFAULT 0,
     closed_book_rpp3 NUMBER DEFAULT 0,
+    closed_book_patch_format VARCHAR2(100) DEFAULT 'CBJ-%04d',
     closed_book_last_deployed_patch VARCHAR2(255),
+    
     max_mig_rpp1 NUMBER DEFAULT 0,
     max_mig_rpp2 NUMBER DEFAULT 0,
     max_mig_rpp3 NUMBER DEFAULT 0,
+    max_mig_patch_format VARCHAR2(100) DEFAULT 'MIG-%04d',
     max_mig_last_deployed_patch VARCHAR2(255)
 );
 

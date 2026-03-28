@@ -41,16 +41,20 @@
                             <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;">
                                 <!-- Open Book Section -->
                                 <div style="border-right: 1px solid rgba(0,0,0,0.05); padding-right: 15px;">
-                                    <h4 style="font-size: 0.9rem; font-weight: 600; margin-bottom: 12px; color: var(--primary);">Open Book Series</h4>
-                                    <div class="form-group" style="margin-bottom: 10px;">
+                                    <h4 style="font-size: 0.9rem; font-weight: 600; margin-bottom: 5px; color: var(--primary);">Open Book Series</h4>
+                                    <div class="form-group" style="margin-bottom: 12px;">
+                                        <label class="form-label" style="font-size: 0.7rem; color: var(--text-muted);">Patch Format Pattern</label>
+                                        <input type="text" class="form-control form-control-sm" th:field="*{openBookPatchFormat}" required>
+                                    </div>
+                                    <div class="form-group" style="margin-bottom: 8px;">
                                         <label class="form-label" style="font-size: 0.75rem;">RPP1 Current</label>
                                         <input type="number" class="form-control" th:field="*{openBookRPP1}" required>
                                     </div>
-                                    <div class="form-group" style="margin-bottom: 10px;">
+                                    <div class="form-group" style="margin-bottom: 8px;">
                                         <label class="form-label" style="font-size: 0.75rem;">RPP2 Current</label>
                                         <input type="number" class="form-control" th:field="*{openBookRPP2}" required>
                                     </div>
-                                    <div class="form-group" style="margin-bottom: 10px;">
+                                    <div class="form-group" style="margin-bottom: 8px;">
                                         <label class="form-label" style="font-size: 0.75rem;">RPP3 Current</label>
                                         <input type="number" class="form-control" th:field="*{openBookRPP3}" required>
                                     </div>
@@ -62,16 +66,20 @@
 
                                 <!-- Closed Book Section -->
                                 <div style="border-right: 1px solid rgba(0,0,0,0.05); padding-right: 15px;">
-                                    <h4 style="font-size: 0.9rem; font-weight: 600; margin-bottom: 12px; color: var(--danger);">Closed Book Series</h4>
-                                    <div class="form-group" style="margin-bottom: 10px;">
+                                    <h4 style="font-size: 0.9rem; font-weight: 600; margin-bottom: 5px; color: var(--danger);">Closed Book Series</h4>
+                                    <div class="form-group" style="margin-bottom: 12px;">
+                                        <label class="form-label" style="font-size: 0.7rem; color: var(--text-muted);">Patch Format Pattern</label>
+                                        <input type="text" class="form-control form-control-sm" th:field="*{closedBookPatchFormat}" required>
+                                    </div>
+                                    <div class="form-group" style="margin-bottom: 8px;">
                                         <label class="form-label" style="font-size: 0.75rem;">RPP1 Current</label>
                                         <input type="number" class="form-control" th:field="*{closedBookRPP1}" required>
                                     </div>
-                                    <div class="form-group" style="margin-bottom: 10px;">
+                                    <div class="form-group" style="margin-bottom: 8px;">
                                         <label class="form-label" style="font-size: 0.75rem;">RPP2 Current</label>
                                         <input type="number" class="form-control" th:field="*{closedBookRPP2}" required>
                                     </div>
-                                    <div class="form-group" style="margin-bottom: 10px;">
+                                    <div class="form-group" style="margin-bottom: 8px;">
                                         <label class="form-label" style="font-size: 0.75rem;">RPP3 Current</label>
                                         <input type="number" class="form-control" th:field="*{closedBookRPP3}" required>
                                     </div>
@@ -83,16 +91,20 @@
 
                                 <!-- Migration Section -->
                                 <div>
-                                    <h4 style="font-size: 0.9rem; font-weight: 600; margin-bottom: 12px; color: var(--warning);">Migration Series</h4>
-                                    <div class="form-group" style="margin-bottom: 10px;">
+                                    <h4 style="font-size: 0.9rem; font-weight: 600; margin-bottom: 5px; color: var(--warning);">Max Migration Series</h4>
+                                    <div class="form-group" style="margin-bottom: 12px;">
+                                        <label class="form-label" style="font-size: 0.7rem; color: var(--text-muted);">Patch Format Pattern</label>
+                                        <input type="text" class="form-control form-control-sm" th:field="*{maxMigPatchFormat}" required>
+                                    </div>
+                                    <div class="form-group" style="margin-bottom: 8px;">
                                         <label class="form-label" style="font-size: 0.75rem;">RPP1 Current</label>
                                         <input type="number" class="form-control" th:field="*{maxMigRPP1}" required>
                                     </div>
-                                    <div class="form-group" style="margin-bottom: 10px;">
+                                    <div class="form-group" style="margin-bottom: 8px;">
                                         <label class="form-label" style="font-size: 0.75rem;">RPP2 Current</label>
                                         <input type="number" class="form-control" th:field="*{maxMigRPP2}" required>
                                     </div>
-                                    <div class="form-group" style="margin-bottom: 10px;">
+                                    <div class="form-group" style="margin-bottom: 8px;">
                                         <label class="form-label" style="font-size: 0.75rem;">RPP3 Current</label>
                                         <input type="number" class="form-control" th:field="*{maxMigRPP3}" required>
                                     </div>
@@ -103,16 +115,19 @@
                                 </div>
                             </div>
 
-                            <div style="margin-top: 25px; padding-top: 15px; border-top: 1px solid rgba(26,54,126,0.1);">
-                            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.4rem;">
-                                Save System Configuration
-                            </button>
+                            <div style="margin-top: 25px; padding-top: 15px; border-top: 1px solid rgba(26,54,126,0.1); display:flex; gap:10px;">
+                                <button type="submit" class="btn btn-primary" style="flex: 2; padding: 0.5rem;">
+                                    Save System Configuration
+                                </button>
+                                <a th:href="@{/tasks}" class="btn btn-outline" style="flex: 1; padding: 0.5rem; text-align:center; text-decoration:none;">
+                                    Cancel
+                                </a>
+                            </div>
+                        </form>
                     </div>
-                    </form>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </body>
 

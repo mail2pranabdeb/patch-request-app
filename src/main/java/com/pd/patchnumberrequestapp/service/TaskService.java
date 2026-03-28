@@ -38,10 +38,9 @@ public class TaskService {
             String lineType = task.getLineType() != null ? task.getLineType() : "RPP1";
             
             Long nextVal = 0L;
-            String prefix = "";
             
+            String format = "";
             if ("Open Book".equalsIgnoreCase(bookType)) {
-                prefix = "OB";
                 if ("RPP1".equalsIgnoreCase(lineType)) {
                     nextVal = config.getOpenBookRPP1() + 1;
                     config.setOpenBookRPP1(nextVal);
@@ -52,8 +51,20 @@ public class TaskService {
                     nextVal = config.getOpenBookRPP3() + 1;
                     config.setOpenBookRPP3(nextVal);
                 }
+                format = config.getOpenBookPatchFormat();
+            } else if ("Migration".equalsIgnoreCase(bookType)) {
+                if ("RPP1".equalsIgnoreCase(lineType)) {
+                    nextVal = config.getMaxMigRPP1() + 1;
+                    config.setMaxMigRPP1(nextVal);
+                } else if ("RPP2".equalsIgnoreCase(lineType)) {
+                    nextVal = config.getMaxMigRPP2() + 1;
+                    config.setMaxMigRPP2(nextVal);
+                } else {
+                    nextVal = config.getMaxMigRPP3() + 1;
+                    config.setMaxMigRPP3(nextVal);
+                }
+                format = config.getMaxMigPatchFormat();
             } else {
-                prefix = "CB";
                 if ("RPP1".equalsIgnoreCase(lineType)) {
                     nextVal = config.getClosedBookRPP1() + 1;
                     config.setClosedBookRPP1(nextVal);
@@ -64,13 +75,16 @@ public class TaskService {
                     nextVal = config.getClosedBookRPP3() + 1;
                     config.setClosedBookRPP3(nextVal);
                 }
+                format = config.getClosedBookPatchFormat();
             }
             
             patchConfigRepository.updateConfig(config);
             
-            // Format example: OB-RPP1-0101
-            String patchNumber = String.format("%s-%s-%04d", prefix, lineType, nextVal);
-            task.setPatchNumber(patchNumber);
+            // Use the user-defined format string (e.g. OBJ-%04d)
+            if (format == null || !format.contains("%")) {
+                format = "PATCH-%d"; // Fallback
+            }
+            task.setPatchNumber(String.format(format, nextVal));
             
             taskRepository.save(task); 
         } else {
