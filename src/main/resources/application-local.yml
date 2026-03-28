@@ -6,8 +6,7 @@ spring:
     password: password
   sql:
     init:
-      # Only run if the database is newly created (embedded mode)
-      mode: embedded
+      mode: always
       schema-locations: classpath:schema.sql
       data-locations: classpath:data.sql
   h2:

@@ -7,8 +7,6 @@ import com.pd.patchnumberrequestapp.repository.TaskRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -34,18 +32,47 @@ public class TaskService {
     public void saveTask(Task task) {
         if (task.getId() == null && (task.getPatchNumber() == null || task.getPatchNumber().isEmpty())) {
             PatchConfig config = patchConfigRepository.getConfig();
-            String dateFormat = config != null && config.getDateFormat() != null ? config.getDateFormat() : "yyyyMMdd";
-            int length = config != null ? config.getSequenceLength() : 3;
+            if (config == null) config = new PatchConfig();
             
-            String dateStr = LocalDate.now().format(DateTimeFormatter.ofPattern(dateFormat));
+            String bookType = task.getBookType() != null ? task.getBookType() : "Open Book";
+            String lineType = task.getLineType() != null ? task.getLineType() : "RPP1";
+            
+            Long nextVal = 0L;
+            String prefix = "";
+            
+            if ("Open Book".equalsIgnoreCase(bookType)) {
+                prefix = "OB";
+                if ("RPP1".equalsIgnoreCase(lineType)) {
+                    nextVal = config.getOpenBookRPP1() + 1;
+                    config.setOpenBookRPP1(nextVal);
+                } else if ("RPP2".equalsIgnoreCase(lineType)) {
+                    nextVal = config.getOpenBookRPP2() + 1;
+                    config.setOpenBookRPP2(nextVal);
+                } else {
+                    nextVal = config.getOpenBookRPP3() + 1;
+                    config.setOpenBookRPP3(nextVal);
+                }
+            } else {
+                prefix = "CB";
+                if ("RPP1".equalsIgnoreCase(lineType)) {
+                    nextVal = config.getClosedBookRPP1() + 1;
+                    config.setClosedBookRPP1(nextVal);
+                } else if ("RPP2".equalsIgnoreCase(lineType)) {
+                    nextVal = config.getClosedBookRPP2() + 1;
+                    config.setClosedBookRPP2(nextVal);
+                } else {
+                    nextVal = config.getClosedBookRPP3() + 1;
+                    config.setClosedBookRPP3(nextVal);
+                }
+            }
+            
+            patchConfigRepository.updateConfig(config);
+            
+            // Format example: OB-RPP1-0101
+            String patchNumber = String.format("%s-%s-%04d", prefix, lineType, nextVal);
+            task.setPatchNumber(patchNumber);
             
             taskRepository.save(task); 
-            
-            if (task.getId() != null) {
-                String formattedId = String.format("%0" + length + "d", task.getId());
-                task.setPatchNumber(dateStr + "-" + formattedId);
-                taskRepository.save(task);
-            }
         } else {
             taskRepository.save(task);
         }

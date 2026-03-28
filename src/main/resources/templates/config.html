@@ -38,42 +38,52 @@
                         <form th:action="@{/config/save}" th:object="${config}" method="post">
                             <input type="hidden" th:field="*{id}" />
 
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-                                <div class="form-group">
-                                    <label class="form-label">Sequence Date Format</label>
-                                    <input type="text" class="form-control" th:field="*{dateFormat}" required
-                                        placeholder="e.g., yyyyMMdd">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                                <!-- Open Book Section -->
+                                <div style="border-right: 1px solid rgba(0,0,0,0.05); padding-right: 20px;">
+                                    <h4 style="font-size: 0.95rem; font-weight: 600; margin-bottom: 15px; color: var(--primary);">Open Book Patch Series</h4>
+                                    <div class="form-group" style="margin-bottom: 12px;">
+                                        <label class="form-label">RPP1 Current Sequence</label>
+                                        <input type="number" class="form-control" th:field="*{openBookRPP1}" required>
+                                    </div>
+                                    <div class="form-group" style="margin-bottom: 12px;">
+                                        <label class="form-label">RPP2 Current Sequence</label>
+                                        <input type="number" class="form-control" th:field="*{openBookRPP2}" required>
+                                    </div>
+                                    <div class="form-group" style="margin-bottom: 12px;">
+                                        <label class="form-label">RPP3 Current Sequence</label>
+                                        <input type="number" class="form-control" th:field="*{openBookRPP3}" required>
+                                    </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="form-label">Sequence Length</label>
-                                    <input type="number" class="form-control" th:field="*{sequenceLength}" required>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="form-label">Open Book Last Deployed Patch</label>
-                                    <input type="text" class="form-control" th:field="*{openBookLastDeployedPatch}"
-                                        placeholder="Record the latest patch here">
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="form-label">Closed Book Last Deployed Patch</label>
-                                    <input type="text" class="form-control" th:field="*{closedBookLastDeployedPatch}"
-                                        placeholder="Record the latest patch here">
+                                <!-- Closed Book Section -->
+                                <div>
+                                    <h4 style="font-size: 0.95rem; font-weight: 600; margin-bottom: 15px; color: var(--danger);">Closed Book Patch Series</h4>
+                                    <div class="form-group" style="margin-bottom: 12px;">
+                                        <label class="form-label">RPP1 Current Sequence</label>
+                                        <input type="number" class="form-control" th:field="*{closedBookRPP1}" required>
+                                    </div>
+                                    <div class="form-group" style="margin-bottom: 12px;">
+                                        <label class="form-label">RPP2 Current Sequence</label>
+                                        <input type="number" class="form-control" th:field="*{closedBookRPP2}" required>
+                                    </div>
+                                    <div class="form-group" style="margin-bottom: 12px;">
+                                        <label class="form-label">RPP3 Current Sequence</label>
+                                        <input type="number" class="form-control" th:field="*{closedBookRPP3}" required>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div
-                                style="margin-top: 15px; padding-top: 10px; border-top: 1px solid rgba(26,54,126,0.1);">
-                                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.4rem;">
-                                    Save System Configuration
-                                </button>
-                            </div>
-                        </form>
+                            <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid rgba(26,54,126,0.1);">
+                            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.4rem;">
+                                Save System Configuration
+                            </button>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </body>
 

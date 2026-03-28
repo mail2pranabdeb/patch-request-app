@@ -2,23 +2,24 @@ package com.pd.patchnumberrequestapp.model;
 
 public class PatchConfig {
     private Long id;
-    private String dateFormat; // e.g., "yyyyMMdd"
-    private int sequenceLength; // e.g., 3 for 001, 002
-    private String openBookLastDeployedPatch; 
-    private String closedBookLastDeployedPatch;
+    
+    // Open Book Series
+    private Long openBookRPP1;
+    private Long openBookRPP2;
+    private Long openBookRPP3;
+    
+    // Closed Book Series
+    private Long closedBookRPP1;
+    private Long closedBookRPP2;
+    private Long closedBookRPP3;
 
     public PatchConfig() {
-        this.dateFormat = "yyyyMMdd";
-        this.sequenceLength = 3;
-        this.openBookLastDeployedPatch = "";
-        this.closedBookLastDeployedPatch = "";
-    }
-
-    public PatchConfig(String dateFormat, int sequenceLength, String openBookLastDeployedPatch, String closedBookLastDeployedPatch) {
-        this.dateFormat = dateFormat;
-        this.sequenceLength = sequenceLength;
-        this.openBookLastDeployedPatch = openBookLastDeployedPatch;
-        this.closedBookLastDeployedPatch = closedBookLastDeployedPatch;
+        this.openBookRPP1 = 0L;
+        this.openBookRPP2 = 0L;
+        this.openBookRPP3 = 0L;
+        this.closedBookRPP1 = 0L;
+        this.closedBookRPP2 = 0L;
+        this.closedBookRPP3 = 0L;
     }
 
     public Long getId() {
@@ -29,46 +30,64 @@ public class PatchConfig {
         this.id = id;
     }
 
-    public String getDateFormat() {
-        return dateFormat;
+    public Long getOpenBookRPP1() {
+        return openBookRPP1;
     }
 
-    public void setDateFormat(String dateFormat) {
-        this.dateFormat = dateFormat;
+    public void setOpenBookRPP1(Long openBookRPP1) {
+        this.openBookRPP1 = openBookRPP1;
     }
 
-    public int getSequenceLength() {
-        return sequenceLength;
+    public Long getOpenBookRPP2() {
+        return openBookRPP2;
     }
 
-    public void setSequenceLength(int sequenceLength) {
-        this.sequenceLength = sequenceLength;
+    public void setOpenBookRPP2(Long openBookRPP2) {
+        this.openBookRPP2 = openBookRPP2;
     }
 
-    public String getOpenBookLastDeployedPatch() {
-        return openBookLastDeployedPatch;
+    public Long getOpenBookRPP3() {
+        return openBookRPP3;
     }
 
-    public void setOpenBookLastDeployedPatch(String openBookLastDeployedPatch) {
-        this.openBookLastDeployedPatch = openBookLastDeployedPatch;
+    public void setOpenBookRPP3(Long openBookRPP3) {
+        this.openBookRPP3 = openBookRPP3;
     }
 
-    public String getClosedBookLastDeployedPatch() {
-        return closedBookLastDeployedPatch;
+    public Long getClosedBookRPP1() {
+        return closedBookRPP1;
     }
 
-    public void setClosedBookLastDeployedPatch(String closedBookLastDeployedPatch) {
-        this.closedBookLastDeployedPatch = closedBookLastDeployedPatch;
+    public void setClosedBookRPP1(Long closedBookRPP1) {
+        this.closedBookRPP1 = closedBookRPP1;
+    }
+
+    public Long getClosedBookRPP2() {
+        return closedBookRPP2;
+    }
+
+    public void setClosedBookRPP2(Long closedBookRPP2) {
+        this.closedBookRPP2 = closedBookRPP2;
+    }
+
+    public Long getClosedBookRPP3() {
+        return closedBookRPP3;
+    }
+
+    public void setClosedBookRPP3(Long closedBookRPP3) {
+        this.closedBookRPP3 = closedBookRPP3;
     }
 
     @Override
     public String toString() {
         return "PatchConfig{" +
                "id=" + id +
-               ", dateFormat='" + dateFormat + '\'' +
-               ", sequenceLength=" + sequenceLength +
-               ", openBookLastDeployedPatch='" + openBookLastDeployedPatch + '\'' +
-               ", closedBookLastDeployedPatch='" + closedBookLastDeployedPatch + '\'' +
+               ", openBookRPP1=" + openBookRPP1 +
+               ", openBookRPP2=" + openBookRPP2 +
+               ", openBookRPP3=" + openBookRPP3 +
+               ", closedBookRPP1=" + closedBookRPP1 +
+               ", closedBookRPP2=" + closedBookRPP2 +
+               ", closedBookRPP3=" + closedBookRPP3 +
                '}';
     }
 }

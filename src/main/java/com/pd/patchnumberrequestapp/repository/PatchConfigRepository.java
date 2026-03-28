@@ -16,10 +16,12 @@ public class PatchConfigRepository {
     private final RowMapper<PatchConfig> rowMapper = (rs, rowNum) -> {
         PatchConfig config = new PatchConfig();
         config.setId(rs.getLong("id"));
-        config.setDateFormat(rs.getString("date_format"));
-        config.setSequenceLength(rs.getInt("sequence_length"));
-        config.setOpenBookLastDeployedPatch(rs.getString("open_book_last_deployed_patch"));
-        config.setClosedBookLastDeployedPatch(rs.getString("closed_book_last_deployed_patch"));
+        config.setOpenBookRPP1(rs.getLong("open_book_rpp1"));
+        config.setOpenBookRPP2(rs.getLong("open_book_rpp2"));
+        config.setOpenBookRPP3(rs.getLong("open_book_rpp3"));
+        config.setClosedBookRPP1(rs.getLong("closed_book_rpp1"));
+        config.setClosedBookRPP2(rs.getLong("closed_book_rpp2"));
+        config.setClosedBookRPP3(rs.getLong("closed_book_rpp3"));
         return config;
     };
 
@@ -29,9 +31,10 @@ public class PatchConfigRepository {
     }
 
     public void updateConfig(PatchConfig config) {
-        String sql = "UPDATE TOOL_PATCH_CONFIG SET date_format = ?, sequence_length = ?, open_book_last_deployed_patch = ?, closed_book_last_deployed_patch = ? WHERE id = ?";
-        jdbcTemplate.update(sql, config.getDateFormat(), config.getSequenceLength(), 
-                            config.getOpenBookLastDeployedPatch(), config.getClosedBookLastDeployedPatch(), 
+        String sql = "UPDATE TOOL_PATCH_CONFIG SET open_book_rpp1 = ?, open_book_rpp2 = ?, open_book_rpp3 = ?, closed_book_rpp1 = ?, closed_book_rpp2 = ?, closed_book_rpp3 = ? WHERE id = ?";
+        jdbcTemplate.update(sql, 
+                            config.getOpenBookRPP1(), config.getOpenBookRPP2(), config.getOpenBookRPP3(),
+                            config.getClosedBookRPP1(), config.getClosedBookRPP2(), config.getClosedBookRPP3(),
                             config.getId());
     }
 }

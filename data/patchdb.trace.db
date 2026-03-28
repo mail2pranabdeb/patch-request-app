@@ -1,0 +1,15 @@
+2026-03-28 18:24:48.970966+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TOOL_APP_TASK" not found (this database is empty); SQL statement:
+SELECT * FROM TOOL_APP_TASK ORDER BY id DESC [42104-224]
+2026-03-28 18:24:52.772169+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TOOL_APP_TASK" not found (this database is empty); SQL statement:
+SELECT * FROM TOOL_APP_TASK ORDER BY id DESC [42104-224]
+2026-03-28 18:24:55.646222+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TOOL_APP_TASK" not found (this database is empty); SQL statement:
+SELECT * FROM TOOL_APP_TASK ORDER BY id DESC [42104-224]
+2026-03-28 18:24:59.406897+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TOOL_APP_TASK" not found (this database is empty); SQL statement:
+SELECT * FROM TOOL_APP_TASK ORDER BY id DESC [42104-224]
+2026-03-28 18:24:59.652350+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TOOL_APP_TASK" not found (this database is empty); SQL statement:
+SELECT * FROM TOOL_APP_TASK ORDER BY id DESC [42104-224]
