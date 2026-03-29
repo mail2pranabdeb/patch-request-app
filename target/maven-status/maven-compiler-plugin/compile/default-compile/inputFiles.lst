@@ -6,6 +6,7 @@ D:\Projects\patch-request-app\src\main\java\com\pd\patchnumberrequestapp\reposit
 D:\Projects\patch-request-app\src\main\java\com\pd\patchnumberrequestapp\repository\PatchConfigRepository.java
 D:\Projects\patch-request-app\src\main\java\com\pd\patchnumberrequestapp\config\SecurityConfig.java
 D:\Projects\patch-request-app\src\main\java\com\pd\patchnumberrequestapp\controller\ConfigController.java
+D:\Projects\patch-request-app\src\main\java\com\pd\patchnumberrequestapp\controller\PrepareController.java
 D:\Projects\patch-request-app\src\main\java\com\pd\patchnumberrequestapp\security\CustomUserDetailsService.java
 D:\Projects\patch-request-app\src\main\java\com\pd\patchnumberrequestapp\model\PatchConfig.java
 D:\Projects\patch-request-app\src\main\java\com\pd\patchnumberrequestapp\controller\TaskController.java

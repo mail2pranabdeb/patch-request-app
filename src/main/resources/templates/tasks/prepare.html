@@ -28,35 +28,60 @@
             <div class="content-area">
                 <div class="card" style="max-width: 900px;">
                     <div class="card-body">
-                        <form th:action="@{/prepare/generate}" method="post" enctype="multipart/form-data" id="prepareForm">
+                        <form th:action="@{/prepare/generate}" method="post" enctype="multipart/form-data"
+                            id="prepareForm">
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                                 <!-- Identity Section -->
                                 <div class="form-group">
-                                    <label class="form-label">Patch Number <span style="color:var(--danger);">*</span></label>
-                                    <input type="text" name="patchNumber" class="form-control" placeholder="e.g. Rpp_App.11.3.04.71.001_20260328" required>
+                                    <label class="form-label">Patch Number <span
+                                            style="color:var(--danger);">*</span></label>
+                                    <input type="text" name="patchNumber" class="form-control"
+                                        placeholder="e.g. Rpp_App.11.3.04.71.001_20260328" required>
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label">Requested By <span style="color:var(--danger);">*</span></label>
-                                    <input type="text" name="requestedBy" class="form-control" placeholder="Your Name" required>
+                                    <label class="form-label">Requested By <span
+                                            style="color:var(--danger);">*</span></label>
+                                    <input type="text" name="requestedBy" class="form-control" placeholder="Your Name"
+                                        required>
                                 </div>
 
                                 <!-- Database Objects Section -->
                                 <div class="form-group" style="grid-column: 1 / -1;">
-                                    <div style="padding: 15px; background: rgba(0,0,0,0.02); border-radius: 8px; border: 1px solid var(--border);">
-                                        <h4 style="font-size: 0.95rem; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
-                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4M3 5v14a2 2 0 0 0 2 2h16v-5M18 12a2 2 0 0 0 0 4h4v-4h-4z"/></svg>
-                                            Database Scripts (Execution Order Maintained)
+                                    <div
+                                        style="padding: 15px; background: rgba(0,0,0,0.02); border-radius: 8px; border: 1px solid var(--border);">
+                                        <h4
+                                            style="font-size: 0.95rem; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2">
+                                                <path
+                                                    d="M21 12V7H5a2 2 0 0 1 0-4h14v4M3 5v14a2 2 0 0 0 2 2h16v-5M18 12a2 2 0 0 0 0 4h4v-4h-4z" />
+                                            </svg>
+                                            Database Scripts
                                         </h4>
                                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                                             <div>
-                                                <label class="form-label" style="font-weight: 600;">Transactional DB Objects</label>
-                                                <input type="file" name="transactionalFiles" class="form-control" multiple style="font-size: 0.8rem; padding: 10px;">
-                                                <small style="color: var(--text-muted); display: block; margin-top: 5px;">Select multiple files. Order of selection is preserved.</small>
+                                                <label class="form-label" style="font-weight: 600;">Transactional DB
+                                                    Objects</label>
+                                                <input type="file" name="transactionalFiles" id="transFiles"
+                                                    class="form-control" multiple
+                                                    accept=".sql,.pck,.bdy,.spc,.prc,.fnc,.vw,.trg"
+                                                    style="font-size: 0.8rem; padding: 10px;">
+                                                <div id="transList" class="file-preview-list"></div>
+                                                <small
+                                                    style="color: var(--text-muted); display: block; margin-top: 5px;">SQL,
+                                                    PCK, BDY, PRC etc. Order is preserved.</small>
                                             </div>
                                             <div>
-                                                <label class="form-label" style="font-weight: 600;">Reporting DB Objects</label>
-                                                <input type="file" name="reportingFiles" class="form-control" multiple style="font-size: 0.8rem; padding: 10px;">
-                                                <small style="color: var(--text-muted); display: block; margin-top: 5px;">Select multiple files. Order of selection is preserved.</small>
+                                                <label class="form-label" style="font-weight: 600;">Reporting DB
+                                                    Objects</label>
+                                                <input type="file" name="reportingFiles" id="repFiles"
+                                                    class="form-control" multiple
+                                                    accept=".sql,.pck,.bdy,.spc,.prc,.fnc,.vw,.trg"
+                                                    style="font-size: 0.8rem; padding: 10px;">
+                                                <div id="repList" class="file-preview-list"></div>
+                                                <small
+                                                    style="color: var(--text-muted); display: block; margin-top: 5px;">SQL,
+                                                    PCK, BDY, PRC etc. Order is preserved.</small>
                                             </div>
                                         </div>
                                     </div>
@@ -64,51 +89,111 @@
 
                                 <!-- Defect Reference Section -->
                                 <div class="form-group" style="grid-column: 1 / -1;">
-                                    <div style="padding: 15px; border: 1px dashed var(--primary); border-radius: 8px; background: #f0f7ff;">
-                                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px;">
+                                    <div
+                                        style="padding: 15px; border: 1px dashed var(--primary); border-radius: 8px; background: #f0f7ff;">
+                                        <div
+                                            style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px;">
                                             <div>
-                                                <label class="form-label" style="font-weight: 600; color: var(--primary);">Defect Reference & Analysis</label>
-                                                <p style="font-size: 0.8rem; color: #5c6c9c;">Upload the filled Defect Reference Excel sheet.</p>
+                                                <label class="form-label"
+                                                    style="font-weight: 600; color: var(--primary);">Defect Reference &
+                                                    Analysis</label>
+                                                <p style="font-size: 0.8rem; color: #5c6c9c;">Upload the filled Defect
+                                                    Reference Excel sheet.</p>
                                             </div>
-                                            <a th:href="@{/prepare/download-template}" class="btn btn-outline" style="font-size: 0.75rem; padding: 4px 10px;">
-                                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                                            <a th:href="@{/prepare/download-template}" class="btn btn-outline"
+                                                style="font-size: 0.75rem; padding: 4px 10px;">
+                                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2.5">
+                                                    <path
+                                                        d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
+                                                </svg>
                                                 Download Template
                                             </a>
                                         </div>
-                                        <input type="file" name="defectFile" class="form-control" accept=".xlsx, .xls" required>
+                                        <input type="file" name="defectFile" id="defectFile" class="form-control"
+                                            accept=".xlsx, .xls, .csv" required>
+                                        <div id="defectPreview" class="file-preview-list"></div>
                                     </div>
                                 </div>
                             </div>
 
                             <div style="margin-top: 30px; display: flex; gap: 15px;">
-                                <button type="submit" class="btn btn-primary" style="flex: 2; padding: 12px; font-weight: 600;">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right: 8px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                                <button type="submit" class="btn btn-primary"
+                                    style="flex: 2; padding: 12px; font-weight: 600;">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2.5" style="margin-right: 8px;">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12" />
+                                    </svg>
                                     Upload and Generate Patch Bundle
                                 </button>
-                                <button type="reset" class="btn btn-outline" style="flex: 1; padding: 12px;">Clear Form</button>
+                                <button type="reset" class="btn btn-outline" style="flex: 1; padding: 12px;"
+                                    onclick="document.querySelectorAll('.file-preview-list').forEach(l => l.innerHTML='')">Clear
+                                    Form</button>
                             </div>
                         </form>
                     </div>
                 </div>
 
                 <!-- Guidance Info -->
-                <div style="margin-top: 25px; max-width: 900px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;">
+                <div
+                    style="margin-top: 25px; max-width: 900px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;">
                     <div class="card card-body" style="border-left: 4px solid var(--info); padding: 12px;">
                         <h5 style="font-size: 0.85rem; margin-bottom: 5px;">📦 Package Structure</h5>
-                        <p style="font-size: 0.75rem; color: var(--text-muted);">ZIP will contain README, Release Notes, and ordered SQL scripts in transactional/reporting folders.</p>
+                        <p style="font-size: 0.75rem; color: var(--text-muted);">ZIP will contain README, Release Notes,
+                            and ordered SQL scripts in transactional/reporting folders.</p>
                     </div>
                     <div class="card card-body" style="border-left: 4px solid var(--success); padding: 12px;">
                         <h5 style="font-size: 0.85rem; margin-bottom: 5px;">📄 Auto-README</h5>
-                        <p style="font-size: 0.75rem; color: var(--text-muted);">A comprehensive instruction text file will be auto-generated based on your inputs.</p>
+                        <p style="font-size: 0.75rem; color: var(--text-muted);">A comprehensive instruction text file
+                            will be auto-generated based on your inputs.</p>
                     </div>
                     <div class="card card-body" style="border-left: 4px solid var(--warning); padding: 12px;">
                         <h5 style="font-size: 0.85rem; margin-bottom: 5px;">⚖️ Index Scripts</h5>
-                        <p style="font-size: 0.75rem; color: var(--text-muted);">System generates index.sql to maintain the execution sequence of your uploaded SQL files.</p>
+                        <p style="font-size: 0.75rem; color: var(--text-muted);">System generates index.sql to maintain
+                            the execution sequence of your uploaded SQL files.</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <style>
+        .file-preview-list {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .file-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75rem;
+            color: var(--text-main);
+            background: rgba(0, 0, 0, 0.04);
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+    </style>
+
+    <script th:inline="javascript">
+        function handleFileSelect(input, listId) {
+            const list = document.getElementById(listId);
+            list.innerHTML = '';
+            const files = Array.from(input.files);
+            files.forEach((file, index) => {
+                const item = document.createElement('div');
+                item.className = 'file-item';
+                item.innerHTML = `<span style="color:var(--text-muted); font-weight:600;">#${index + 1}</span> <span>${file.name}</span>`;
+                list.appendChild(item);
+            });
+        }
+
+        document.getElementById('transFiles').addEventListener('change', (e) => handleFileSelect(e.target, 'transList'));
+        document.getElementById('repFiles').addEventListener('change', (e) => handleFileSelect(e.target, 'repList'));
+        document.getElementById('defectFile').addEventListener('change', (e) => handleFileSelect(e.target, 'defectPreview'));
+    </script>
 </body>
 
 </html>

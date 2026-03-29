@@ -30,15 +30,15 @@ public class PrepareController {
 
     @GetMapping("/download-template")
     public ResponseEntity<Resource> downloadTemplate() throws IOException {
-        // Create an empty dummy excel file if not exists for the demo
-        Path path = Paths.get("temp_template.xlsx");
-        if (!Files.exists(path)) {
-            Files.write(path, "Empty Template Content".getBytes());
-        }
+        // Create a simple CSV template with two required columns
+        Path path = Paths.get("defect_reference_template.csv");
+        String content = "Task/Defect Reference ID, Task/Defect Description\n";
+        Files.write(path, content.getBytes());
+        
         Resource resource = new UrlResource(path.toUri());
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=defect_reference_template.xlsx")
-                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=defect_reference_template.csv")
+                .contentType(MediaType.TEXT_PLAIN)
                 .body(resource);
     }
 
