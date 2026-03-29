@@ -1,5 +1,8 @@
 package com.pd.patchnumberrequestapp.controller;
 
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
@@ -108,15 +111,34 @@ public class PrepareController {
         zos.write(readme.getBytes());
         zos.closeEntry();
 
-        // Add Releasenote
-        String releasenote = "RELEASE NOTES\n" +
-                "====================================\n" +
-                "Project: WebLogic Patch Manager\n" +
-                "Summary: Fixes associated with " + patchNumber + "\n" +
-                "Status: Certified for Deployment";
-        zos.putNextEntry(new ZipEntry("releasenote.txt"));
-        zos.write(releasenote.getBytes());
-        zos.closeEntry();
+        // Add Releasenote as native MS Word (.docx)
+        try (XWPFDocument document = new XWPFDocument()) {
+            XWPFParagraph title = document.createParagraph();
+            XWPFRun titleRun = title.createRun();
+            titleRun.setBold(true);
+            titleRun.setFontSize(16);
+            titleRun.setText("RELEASE NOTES");
+            
+            XWPFParagraph body = document.createParagraph();
+            XWPFRun bodyRun = body.createRun();
+            bodyRun.setText("====================================");
+            bodyRun.addBreak();
+            bodyRun.setText("Patch Number: " + patchNumber);
+            bodyRun.addBreak();
+            bodyRun.setText("Requested By: " + requestedBy);
+            bodyRun.addBreak();
+            bodyRun.setText("Release Date: " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm:ss")));
+            bodyRun.addBreak();
+            bodyRun.setText("====================================");
+            bodyRun.addBreak();
+            bodyRun.setText("Project Status: Certified for Production Deployment");
+            
+            ByteArrayOutputStream docStream = new ByteArrayOutputStream();
+            document.write(docStream);
+            zos.putNextEntry(new ZipEntry("releasenote.docx"));
+            zos.write(docStream.toByteArray());
+            zos.closeEntry();
+        }
 
         zos.finish();
         zos.close();
