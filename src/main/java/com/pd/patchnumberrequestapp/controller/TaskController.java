@@ -32,11 +32,6 @@ public class TaskController {
         return "tasks/list";
     }
 
-    @GetMapping("/prepare")
-    public String preparePatch() {
-        return "tasks/prepare";
-    }
-
     @GetMapping("/tasks/new")
     public String newTaskForm(Model model) {
         Task task = new Task();

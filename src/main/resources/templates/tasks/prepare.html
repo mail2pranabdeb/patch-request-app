@@ -19,8 +19,8 @@
                         </svg>
                     </div>
                     <div class="page-title-text">
-                        <h2>Prepare Patch Orchestration</h2>
-                        <p>File processing and deployment container staging zone.</p>
+                        <h2>Prepare Patch Bundle</h2>
+                        <p>Assemble database scripts and defect references into a production-ready ZIP package.</p>
                     </div>
                 </div>
             </div>
@@ -28,26 +28,82 @@
             <div class="content-area">
                 <div class="card" style="max-width: 900px;">
                     <div class="card-body">
-                        <div
-                            style="display: flex; align-items: flex-start; gap: 15px; padding: 15px; background: #fff; border-radius: 4px; border: 1px dashed rgba(26,54,126,0.2);">
-                            <div style="background: #e0f3ff; color: var(--primary); padding: 12px; border-radius: 50%;">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2.5">
-                                    <path
-                                        d="M21.2 15c.7-1.2 1-2.5.7-3.9-.6-2-2.4-3.5-4.4-3.5h-1.2c-.7-3-3.2-5.2-6.2-5.6-3-.3-5.9 1.3-7.3 4-1.2 2.5-1 6.5.5 8.7m8.5 5.5v-8m-3 3 3-3 3 3" />
-                                </svg>
+                        <form th:action="@{/prepare/generate}" method="post" enctype="multipart/form-data" id="prepareForm">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                                <!-- Identity Section -->
+                                <div class="form-group">
+                                    <label class="form-label">Patch Number <span style="color:var(--danger);">*</span></label>
+                                    <input type="text" name="patchNumber" class="form-control" placeholder="e.g. Rpp_App.11.3.04.71.001_20260328" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Requested By <span style="color:var(--danger);">*</span></label>
+                                    <input type="text" name="requestedBy" class="form-control" placeholder="Your Name" required>
+                                </div>
+
+                                <!-- Database Objects Section -->
+                                <div class="form-group" style="grid-column: 1 / -1;">
+                                    <div style="padding: 15px; background: rgba(0,0,0,0.02); border-radius: 8px; border: 1px solid var(--border);">
+                                        <h4 style="font-size: 0.95rem; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4M3 5v14a2 2 0 0 0 2 2h16v-5M18 12a2 2 0 0 0 0 4h4v-4h-4z"/></svg>
+                                            Database Scripts (Execution Order Maintained)
+                                        </h4>
+                                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                                            <div>
+                                                <label class="form-label" style="font-weight: 600;">Transactional DB Objects</label>
+                                                <input type="file" name="transactionalFiles" class="form-control" multiple style="font-size: 0.8rem; padding: 10px;">
+                                                <small style="color: var(--text-muted); display: block; margin-top: 5px;">Select multiple files. Order of selection is preserved.</small>
+                                            </div>
+                                            <div>
+                                                <label class="form-label" style="font-weight: 600;">Reporting DB Objects</label>
+                                                <input type="file" name="reportingFiles" class="form-control" multiple style="font-size: 0.8rem; padding: 10px;">
+                                                <small style="color: var(--text-muted); display: block; margin-top: 5px;">Select multiple files. Order of selection is preserved.</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Defect Reference Section -->
+                                <div class="form-group" style="grid-column: 1 / -1;">
+                                    <div style="padding: 15px; border: 1px dashed var(--primary); border-radius: 8px; background: #f0f7ff;">
+                                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px;">
+                                            <div>
+                                                <label class="form-label" style="font-weight: 600; color: var(--primary);">Defect Reference & Analysis</label>
+                                                <p style="font-size: 0.8rem; color: #5c6c9c;">Upload the filled Defect Reference Excel sheet.</p>
+                                            </div>
+                                            <a th:href="@{/prepare/download-template}" class="btn btn-outline" style="font-size: 0.75rem; padding: 4px 10px;">
+                                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                                                Download Template
+                                            </a>
+                                        </div>
+                                        <input type="file" name="defectFile" class="form-control" accept=".xlsx, .xls" required>
+                                    </div>
+                                </div>
                             </div>
-                            <div>
-                                <h3
-                                    style="margin: 0; font-size: 1rem; color: var(--text-main); font-weight: 500; margin-bottom: 5px;">
-                                    Development Feature Provision</h3>
-                                <p style="color: var(--text-muted); font-size: 0.85rem; margin: 0; line-height: 1.5;">
-                                    This interface is provisioned for future functional integration. When activated in
-                                    upcoming system releases, this section will allow users to securely aggregate
-                                    external data files and automatically bundle them into target ZIP archives for
-                                    native orchestration systems.</p>
+
+                            <div style="margin-top: 30px; display: flex; gap: 15px;">
+                                <button type="submit" class="btn btn-primary" style="flex: 2; padding: 12px; font-weight: 600;">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right: 8px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                                    Upload and Generate Patch Bundle
+                                </button>
+                                <button type="reset" class="btn btn-outline" style="flex: 1; padding: 12px;">Clear Form</button>
                             </div>
-                        </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Guidance Info -->
+                <div style="margin-top: 25px; max-width: 900px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;">
+                    <div class="card card-body" style="border-left: 4px solid var(--info); padding: 12px;">
+                        <h5 style="font-size: 0.85rem; margin-bottom: 5px;">📦 Package Structure</h5>
+                        <p style="font-size: 0.75rem; color: var(--text-muted);">ZIP will contain README, Release Notes, and ordered SQL scripts in transactional/reporting folders.</p>
+                    </div>
+                    <div class="card card-body" style="border-left: 4px solid var(--success); padding: 12px;">
+                        <h5 style="font-size: 0.85rem; margin-bottom: 5px;">📄 Auto-README</h5>
+                        <p style="font-size: 0.75rem; color: var(--text-muted);">A comprehensive instruction text file will be auto-generated based on your inputs.</p>
+                    </div>
+                    <div class="card card-body" style="border-left: 4px solid var(--warning); padding: 12px;">
+                        <h5 style="font-size: 0.85rem; margin-bottom: 5px;">⚖️ Index Scripts</h5>
+                        <p style="font-size: 0.75rem; color: var(--text-muted);">System generates index.sql to maintain the execution sequence of your uploaded SQL files.</p>
                     </div>
                 </div>
             </div>
